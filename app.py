@@ -1,7 +1,10 @@
+from typing_extensions import Required
 from flask import Flask, render_template
 
 app = Flask(__name__)
 
+
+
 @app.route('/')
 def test():
-    return render_template('/base.html')
+    return render_template('/home.html')
