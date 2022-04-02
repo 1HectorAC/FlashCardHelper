@@ -8,10 +8,10 @@ import os
 connect(db="test", host=os.getenv('DB_HOST'), port=27017)
 
 class CardsUser(Document):
-    _id = StringField(required = True),
-    userName = StringField(required = True, max_length=64),
-    email = StringField(required = True, max_length=64),
-    password = StringField(reqired=True, max_length=64)
+    _id = StringField(required = True)
+    userName = StringField(required = True, max_length=64)
+    email = StringField(required = True, max_length=64)
+    password = StringField(reqired=True)
 
 class User:
     def start_session(self,user):
@@ -26,7 +26,7 @@ class User:
             _id = uuid.uuid4().hex,
             userName = request.form.get('name'),
             email = request.form.get('email'),
-            password = request.form.get('password'),
+            password = request.form.get('password')
         )
 
         # Encrypt password
