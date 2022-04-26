@@ -18,12 +18,17 @@ def login_required(f):
 
 #Routes
 from user import routes
+from user.models import GetUsersCardsLists
 
-@app.route('/', methods=["GET"])
+@app.route('/', methods=['GET'])
 def home():
     return render_template('home.html')
 
-@app.route('/dashboard/', methods=["GET"])
+
+@app.route('/dashboard/', methods=['GET'])
 @login_required
 def dashboard():
-    return render_template('dashboard.html')
+    #Get users cards list.
+    userCards = GetUsersCardsLists(session['user']['email'])
+    
+    return render_template('dashboard.html', cardsLists = userCards)
