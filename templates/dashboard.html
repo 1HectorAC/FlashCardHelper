@@ -41,8 +41,12 @@
     <div class="row">
         <div class="col-md-10 offset-md-1 text-center">
             <h2>Cards Created.</h1>
-            {% for card in cardsLists %}
-                <h5><u>Title:</u> {{ card.title }}  <u>Description:</u> {{card.description}}</h5>
+            {% for cards in cardsLists %}
+                <h5>
+                    <u>Title:</u> {{ cards.title }}
+                    <u>Description:</u> {{cards.description}}
+                    <a class="btn btn-primary" href="/user/deleteCards/{{cards['title']}}">delete</a>
+                </h5>
             {% endfor %}
 
         </div>
