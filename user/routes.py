@@ -18,3 +18,8 @@ def login():
 @app.route("/user/addCards", methods=["POST"])
 def addCards():
     return User().addCards()
+
+@app.route("/user/deleteCards/<string:title>")
+def deleteCards(title:str):
+    return User().RemoveCardsList(title)
+

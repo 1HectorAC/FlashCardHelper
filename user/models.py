@@ -2,6 +2,7 @@ from flask import Flask, jsonify, request, session, redirect
 from passlib.hash import pbkdf2_sha256
 import uuid
 from mongoengine import connect, Document, StringField, ListField, ReferenceField, DictField
+from mongoengine.queryset.visitor import Q
 import json
 import os
 
@@ -81,8 +82,20 @@ class User:
 
         return jsonify({"success": "Sucess"}), 200
 
+    # Delete Cards list.
+    def RemoveCardsList(self, cardTitle):
+        # Get cards list of given title that is owned by the user
+        cardsList = CardsList.objects(Q(title = cardTitle) & Q(owner_id = session['user']['_id']))
+        
+        # Delete object if exits.
+        if(cardsList):
+          cardsList.delete()
+
+        return redirect('/dashboard/')
+
 # Get a users Cards.
 def GetUsersCardsLists(userEmail):
     user = CardsUser.objects.get(email = userEmail)
     usersCards = json.loads(CardsList.objects(owner_id = user._id).to_json())
     return usersCards
+
