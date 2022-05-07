@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <h2 class="text-center">Edit Cards List</h2>
+
+    <div class="jumbotron text-center">
+        <h3>Cards List Info</h3>
+        <h5>Title: {{ cards.title }}</h5>
+        <h5>Description: {{ cards.description }}</h5>
+    </div>
+    <div class="jumbotron text-center">
+        <h3>Add cards to Cards List</h3>
+        <p>Feature coming soon.</p>
+        <!--
+        <div id="numberSection">
+            <p>Enter number of cards to add:</p>
+            <input id="questionTotal" type="number" name="questionTotal" max="99" min="1">
+            <input id="numberButton" class="btn" type="button" value="Enter" onclick="GenerateBoxes();" />
+        </div>
+
+        <form name="addCard" id="questionSection" style="display:none">
+        </form>
+         -->
+    </div>
+   
+    
+{% endblock %}

@@ -18,7 +18,7 @@ def login_required(f):
 
 #Routes
 from user import routes
-from user.models import GetUsersCardsLists
+from user.models import GetUsersCardsLists, GetSingleCardsList
 
 @app.route('/', methods=['GET'])
 def home():
@@ -29,6 +29,14 @@ def home():
 @login_required
 def dashboard():
     #Get users cards list.
-    userCards = GetUsersCardsLists(session['user']['email'])
+    userCards = GetUsersCardsLists(session['user']['_id'])
     
     return render_template('dashboard.html', cardsLists = userCards)
+
+@app.route('/editCardsList/<string:title>', methods=['GET'])
+@login_required
+def editCardsList(title:str):
+    # Get a single  cardsList.
+    cardsList = GetSingleCardsList(session['user']['_id'], title)
+
+    return render_template('editCardsList.html', cards = cardsList)
