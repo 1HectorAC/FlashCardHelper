@@ -93,9 +93,24 @@ class User:
 
         return redirect('/dashboard/')
 
+    # Add a card to cards list
+    def addCard(self):
+        test = request.form.getlist('questionPart')
+        test2 = request.form.getlist('answerPart')
+        #if(test and test2):
+            #CardsList.object()
+        print(test)
+        print(test2)
+        return jsonify({"success": "Sucess"}), 200
+
 # Get a users Cards.
-def GetUsersCardsLists(userEmail):
-    user = CardsUser.objects.get(email = userEmail)
-    usersCards = json.loads(CardsList.objects(owner_id = user._id).to_json())
+def GetUsersCardsLists(userID):
+    usersCards = json.loads(CardsList.objects(owner_id = userID).to_json())
     return usersCards
 
+# Get a single cards list.
+def GetSingleCardsList(userID, cardsTitle):
+    cardsList = json.loads(CardsList.objects(Q(title = cardsTitle) & Q(owner_id = userID)).to_json())
+    print(cardsList)
+    return cardsList[0]
+        
