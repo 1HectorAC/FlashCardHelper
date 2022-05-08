@@ -45,7 +45,9 @@
                 <h5>
                     <u>Title:</u> {{ cards.title }}
                     <u>Description:</u> {{cards.description}}
-                    <a class="btn btn-primary" href="/user/deleteCards/{{cards['title']}}">delete</a>
+                    <a class="btn btn-primary" href="/user/deleteCards/{{cards['title']}}">Delete</a>
+                    <a class="btn btn-primary" href="/editCardsList/{{cards['title']}}">Edit</a>
+
                 </h5>
             {% endfor %}
 
