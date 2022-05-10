@@ -95,12 +95,19 @@ class User:
 
     # Add a card to cards list
     def addCard(self):
-        test = request.form.getlist('questionPart')
-        test2 = request.form.getlist('answerPart')
-        #if(test and test2):
-            #CardsList.object()
-        print(test)
-        print(test2)
+        questionList = request.form.getlist('questionPart')
+        answerList = request.form.getlist('answerPart')
+        cardsTitle = request.form.get('cardsTitle')
+        
+        # Setup data to add.
+        data = []
+        if "" not in questionList and "" not in answerList and len(questionList) == len(answerList):
+            for x in range(0, len(questionList)):
+                data.append({'question' : questionList[x], 'answer' : answerList[x]})
+
+        # Added cards to cardslist
+        CardsList.objects(Q(title = cardsTitle) & Q(owner_id = session['user']['_id'])).update_one(push_all__cards = data)
+        
         return jsonify({"success": "Sucess"}), 200
 
 # Get a users Cards.
@@ -111,6 +118,5 @@ def GetUsersCardsLists(userID):
 # Get a single cards list.
 def GetSingleCardsList(userID, cardsTitle):
     cardsList = json.loads(CardsList.objects(Q(title = cardsTitle) & Q(owner_id = userID)).to_json())
-    print(cardsList)
     return cardsList[0]
         

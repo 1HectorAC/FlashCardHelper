@@ -23,3 +23,7 @@ def addCards():
 def deleteCards(title:str):
     return User().RemoveCardsList(title)
 
+@app.route("/user/addCard", methods=["POST"])
+def addCard():
+    return User().addCard()
+
