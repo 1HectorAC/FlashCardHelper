@@ -8,11 +8,13 @@
         <h3>Cards List Info</h3>
         <h5>Title: {{ cards.title }}</h5>
         <h5>Description: {{ cards.description }}</h5>
+        <h5>Cards:</h5>
+        {% for x in cards.cards %}
+            <p><u>Q:</u> {{x.question}}       <u>A:</u> {{x.answer}}</p>
+        {% endfor %}
     </div>
     <div class="jumbotron text-center">
         <h3>Add cards to Cards List</h3>
-        <p>Feature coming soon.</p>
-        <!--
         <div id="numberSection">
             <p>Enter number of cards to add:</p>
             <input id="questionTotal" type="number" name="questionTotal" max="99" min="1">
@@ -20,8 +22,9 @@
         </div>
 
         <form name="addCard" id="questionSection" style="display:none">
+            <input type="hidden" id="cardsTitle" name="cardsTitle" value= {{ cards.title }}> 
         </form>
-         -->
+         
     </div>
    
     
