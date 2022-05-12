@@ -110,6 +110,20 @@ class User:
         
         return jsonify({"success": "Sucess"}), 200
 
+    # Delete a card from the card list.
+    def RemoveCard(self, cardTitle, cardNumber):
+        # Get cards list of given title that is owned by the user.
+        cardsList = CardsList.objects(Q(title = cardTitle) & Q(owner_id = session['user']['_id']))
+        
+        if(cardsList):
+            cards = cardsList[0].cards
+            if len(cards) > cardNumber:
+                card = cards[cardNumber]
+                # Remove card from cards list.
+                CardsList.objects(Q(title = cardTitle) & Q(owner_id = session['user']['_id'])).update_one(pull__cards = card)
+
+        return redirect('/editCardsList/'+ cardTitle)
+
 # Get a users Cards.
 def GetUsersCardsLists(userID):
     usersCards = json.loads(CardsList.objects(owner_id = userID).to_json())

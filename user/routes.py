@@ -27,3 +27,7 @@ def deleteCards(title:str):
 def addCard():
     return User().addCard()
 
+@app.route("/user/deleteCard/<string:title>/<int:cardNumber>")
+def deleteCard(title:str, cardNumber:int):
+    return User().RemoveCard(title, cardNumber)
+
