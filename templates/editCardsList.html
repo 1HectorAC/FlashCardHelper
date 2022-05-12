@@ -10,7 +10,9 @@
         <h5>Description: {{ cards.description }}</h5>
         <h5>Cards:</h5>
         {% for x in cards.cards %}
-            <p><u>Q:</u> {{x.question}}       <u>A:</u> {{x.answer}}</p>
+            <p><u>Q:</u> {{x.question}}
+            <u>A:</u> {{x.answer}}
+            <a class="btn btn-primary" href="/user/deleteCard/{{cards.title}}/{{ loop.index-1 }}">Delete</a>
         {% endfor %}
     </div>
     <div class="jumbotron text-center">
