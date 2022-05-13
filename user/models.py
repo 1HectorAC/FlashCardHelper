@@ -10,7 +10,7 @@ connect(db='test', host=os.getenv('DB_HOST'), port=27017)
 
 class CardsUser(Document):
     _id = StringField(required = True)
-    userName = StringField(required = True, max_length=64)
+    userName = StringField(required = True, max_length=64, unique=True)
     email = StringField(required = True, max_length=64)
     password = StringField(reqired=True)
 
@@ -41,6 +41,10 @@ class User:
         user.password = pbkdf2_sha256.encrypt(user['password'])
 
         # ADD MORE VALIDATION HERE LATER.
+        # Unique username check.
+        nameExitsCheck = CardsUser.objects(userName = user.userName)
+        if(nameExitsCheck):
+            return jsonify({'error': 'Signup failed. UserName Already Exits'}), 400
 
         # Save user to db and start session. 
         # Note: passing python dict of user
