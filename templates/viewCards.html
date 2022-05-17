@@ -1,0 +1,39 @@
+{% extends "base.html"  %}
+{% block content %}
+
+
+
+<div class="container">
+    <div class="jumbotron row text-center">
+        <div class="col-md-12 ">
+            <h1 style="display:inline">{{ cards.title }}  </h1><h4 style="display:inline">By: {{ cards.owner_name }}</h4>
+
+        </div>
+        <div class="col-md-2">
+            <input id="previousButton" class="btn" type="button" value="Previous" onclick="previousCard();" disabled/>
+        </div>
+        <div class="col-md-8">
+            
+            <div id="displayCard" style="background-color:white;margin:10px" onclick="cardFlip();">
+                <h4 id="problemLabel">Question</h4>
+                <h5 id="problemText">{{cards.cards[0].question}}</h5>
+            </div>
+
+        </div>
+        <div class="col-md-2">
+            <input id="nextButton" class="btn" type="button" value="Next" onclick="nextCard();" />
+
+        </div>
+        
+    </div>
+</div>
+
+<script src="/static/js/viewCardsScript.js"></script>
+
+<script>
+    var cards = JSON.parse('{{ cards.cards | tojson }}');   
+    setFlashCards(cards);
+</script>
+
+
+{% endblock %}
