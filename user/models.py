@@ -19,7 +19,7 @@ class CardsList(Document):
     title = StringField(required = True, max_length=64)
     description = StringField(max_length=128)
     cards = ListField(DictField())
-    owner_id = StringField(required = True)
+    owner_name = StringField(required = True)
 
 class User:
     def start_session(self,user):
@@ -80,7 +80,7 @@ class User:
             title = request.form.get('title'),
             description = request.form.get('description'),
             cards = [],
-            owner_id = person._id  
+            owner_name = person.userName  
         )
         cards.save()
 
@@ -89,7 +89,7 @@ class User:
     # Delete Cards list.
     def RemoveCardsList(self, cardTitle):
         # Get cards list of given title that is owned by the user
-        cardsList = CardsList.objects(Q(title = cardTitle) & Q(owner_id = session['user']['_id']))
+        cardsList = CardsList.objects(Q(title = cardTitle) & Q(owner_name = session['user']['userName']))
         
         # Delete object if exits.
         if(cardsList):
@@ -110,31 +110,31 @@ class User:
                 data.append({'question' : questionList[x], 'answer' : answerList[x]})
 
         # Added cards to cardslist
-        CardsList.objects(Q(title = cardsTitle) & Q(owner_id = session['user']['_id'])).update_one(push_all__cards = data)
+        CardsList.objects(Q(title = cardsTitle) & Q(owner_name = session['user']['userName'])).update_one(push_all__cards = data)
         
         return jsonify({"success": "Sucess"}), 200
 
     # Delete a card from the card list.
     def RemoveCard(self, cardTitle, cardNumber):
         # Get cards list of given title that is owned by the user.
-        cardsList = CardsList.objects(Q(title = cardTitle) & Q(owner_id = session['user']['_id']))
+        cardsList = CardsList.objects(Q(title = cardTitle) & Q(owner_name = session['user']['userName']))
         
         if(cardsList):
             cards = cardsList[0].cards
             if len(cards) > cardNumber:
                 card = cards[cardNumber]
                 # Remove card from cards list.
-                CardsList.objects(Q(title = cardTitle) & Q(owner_id = session['user']['_id'])).update_one(pull__cards = card)
+                CardsList.objects(Q(title = cardTitle) & Q(owner_name = session['user']['userName'])).update_one(pull__cards = card)
 
         return redirect('/editCardsList/'+ cardTitle)
 
 # Get a users Cards.
-def GetUsersCardsLists(userID):
-    usersCards = json.loads(CardsList.objects(owner_id = userID).to_json())
+def GetUsersCardsLists(userName):
+    usersCards = json.loads(CardsList.objects(owner_name = userName).to_json())
     return usersCards
 
 # Get a single cards list.
-def GetSingleCardsList(userID, cardsTitle):
-    cardsList = json.loads(CardsList.objects(Q(title = cardsTitle) & Q(owner_id = userID)).to_json())
+def GetSingleCardsList(userName, cardsTitle):
+    cardsList = json.loads(CardsList.objects(Q(title = cardsTitle) & Q(owner_name = userName)).to_json())
     return cardsList[0]
         
