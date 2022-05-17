@@ -2,6 +2,7 @@ from typing_extensions import Required
 from flask import Flask, render_template, redirect, session
 from functools import wraps
 import os
+import json
 
 app = Flask(__name__)
 app.secret_key = os.getenv('SECRET_KEY')
@@ -29,7 +30,7 @@ def home():
 @login_required
 def dashboard():
     #Get users cards list.
-    userCards = GetUsersCardsLists(session['user']['_id'])
+    userCards = GetUsersCardsLists(session['user']['userName'])
     
     return render_template('dashboard.html', cardsLists = userCards)
 
@@ -37,6 +38,13 @@ def dashboard():
 @login_required
 def editCardsList(title:str):
     # Get a single  cardsList.
-    cardsList = GetSingleCardsList(session['user']['_id'], title)
+    cardsList = GetSingleCardsList(session['user']['userName'], title)
 
     return render_template('editCardsList.html', cards = cardsList)
+
+@app.route('/viewCards/<string:name>/<string:title>', methods=['GET'])
+def ViewCards(name:str,title:str):
+    # Get a single  cardsList.
+    cardsList = GetSingleCardsList(name, title)
+
+    return render_template('viewCards.html', cards = cardsList)
