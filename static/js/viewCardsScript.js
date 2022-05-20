@@ -7,6 +7,8 @@ var flashCards = [];
 function startCardView(cards){
     flashCards = cards
     cardsSize = flashCards.length;
+    $('#index').text(1);
+    $('#total').text(cardsSize);
     $('#problemLabel').text("Question");
     $('#problemText').text(flashCards[index].question);
     // Enable next next button if there is more than one card in the flashCards.
@@ -43,6 +45,7 @@ function nextCard(){
         $('#previousButton').prop('disabled', false)
     // Update text to show question.
     if(index <= cardsSize){
+        $('#index').text(index + 1);
         $('#problemLabel').text("Question");
         $('#problemText').text(flashCards[index].question);
     }
@@ -60,6 +63,7 @@ function previousCard(){
         $('#nextButton').prop('disabled', false)
     // Update text to show question.
     if(index <= cardsSize){
+        $('#index').text(index + 1);
         $('#problemLabel').text("Question");
         $('#problemText').text(flashCards[index].question);
     }
