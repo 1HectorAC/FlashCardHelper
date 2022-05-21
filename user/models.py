@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, request, session, redirect
 from passlib.hash import pbkdf2_sha256
 import uuid
-from mongoengine import connect, Document, StringField, ListField, ReferenceField, DictField
+from mongoengine import connect, Document, StringField, ListField, ReferenceField, DictField, BooleanField
 from mongoengine.queryset.visitor import Q
 import json
 import os
@@ -18,6 +18,7 @@ class CardsList(Document):
     _id = StringField(required = True)
     title = StringField(required = True, max_length=64)
     description = StringField(max_length=128)
+    public = BooleanField()
     cards = ListField(DictField())
     owner_name = StringField(required = True)
 
@@ -74,11 +75,12 @@ class User:
         
         # Get person to save owner reference into into cardsList created.
         person = CardsUser.objects.get(email = session['user']['email'])
-        
+
         cards = CardsList(
             _id = uuid.uuid4().hex,
             title = request.form.get('title'),
             description = request.form.get('description'),
+            public = True if request.form.get('public') == "true" else False,
             cards = [],
             owner_name = person.userName  
         )
