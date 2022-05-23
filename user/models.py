@@ -46,6 +46,10 @@ class User:
         nameExitsCheck = CardsUser.objects(userName = user.userName)
         if(nameExitsCheck):
             return jsonify({'error': 'Signup failed. UserName Already Exits'}), 400
+        # Unique username check.
+        emailExitsCheck = CardsUser.objects(email = user.email)
+        if(emailExitsCheck):
+            return jsonify({'error': 'Signup failed. Email Already Exits'}), 400
 
         # Save user to db and start session. 
         # Note: passing python dict of user
