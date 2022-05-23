@@ -47,4 +47,10 @@ def ViewCards(name:str,title:str):
     # Get a single  cardsList.
     cardsList = GetSingleCardsList(name, title)
 
+    # Check if cardsList if public.
+    if cardsList['public'] == False:
+        # If cardsList if private then return home if not logged in or if cardsList not owned by current user.
+        if not session.get('logged_in') or session['user']['userName'] != cardsList['owner_name']:
+            return redirect('/')
+
     return render_template('viewCards.html', cards = cardsList)
