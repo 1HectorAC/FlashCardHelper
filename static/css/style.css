@@ -1,3 +1,31 @@
+body{
+    background-image: linear-gradient(to right, #f78ca0 0%, #f9748f 19%, #fd868c 60%, #fe9a8b 100%);
+}
+
 .header{
     margin: 20px;
+    background-color:rgba(255, 170, 170, 0.5);
+    color:white; padding:10px;
+    border-radius: 10px;
+    text-shadow: 2px 2px #b20d0d;
 }
+
+.header2{
+    padding: 20px;
+    font-style:italic;
+    background-color:
+    rgb(144, 78, 70, .70);
+    color: white;
+    margin-bottom: 10px;
+}
+
+.whiteLine{
+    margin:5px;
+    background-color:white
+}
+
+.pinkLine{
+    margin:5px;
+    background-color: #fda1a1;
+}
+

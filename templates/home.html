@@ -3,45 +3,85 @@
 {% block content %}
 
     <div class="row">
-        <div class="col-md-9">
-            <h2>More content will be added here later.</h1>
-        </div>
-        <div class="col-md-3">
-            <div>
-                <h2>Login</h2>
-                <form name="login_form">
-
-                    <label for="email">Email</label>
-                    <input type="text" name="email" class="field" required>
-    
-                    <label for="password">Password</label>
-                    <input type="text" name="password" class="field" required>
-                    
-                    <p class="error error--hidden"></p>
-    
-                    <input type="submit" value="Log In" class="btn">
-    
-                </form>
-            </div>
-            <div>
-                <h2>Create Account</h2>
-                <form name="signup_form">
-
-                    <label for="name">Name</label>
-                    <input type="text" name="name" class="field" required>
-    
-                    <label for="email">Email</label>
-                    <input type="text" name="email" class="field" required>
-    
-                    <label for="password">Password</label>
-                    <input type="text" name="password" class="field" required>
-                    
-                    <p class="error error--hidden"></p>
-    
-                    <input type="submit" value="Sign Up" class="btn">
-    
-                </form>
+        <div class="col-md-12">
+            <div class=" text-center header2" >
+                <hr class="whiteLine">
+                <h5>
+                    Here at FCH we provide a quick and easy way to make digital flash cards! Just make an account and start making cards as fast as you can write them.
+                </h5>
+                <hr class="whiteLine">              
             </div>
         </div>
+        
+
+        <div class="col-md-4">
+            {% if not session['logged_in']%}
+            <div id="accordion">
+                <div class="card text-center" >
+                    <div class="card-header">
+                        <h4>
+                            <a class="card-link" data-toggle="collapse"  href="#loginCollapse" style="color:black">Log in</a>
+                        </h4>
+                    <hr class="pinkLine">
+                    </div>
+                    <div id="loginCollapse" class="collapse show" data-parent="#accordion">
+                        <div class="card-body">
+                            <form name="login_form">
+                                <label for="email">Email</label>
+                                <input type="text" name="email" class="field form-control centerShortField" maxlength="32" placeholder="Enter Email" required>
+                                <label for="password">Password</label>
+                                <input type="password" name="password" class="field form-control centerShortField"  maxlength="32" placeholder="Enter Password" required>
+                                <input type="submit" value="Log In" class="btn btn-primary" style="margin-top: 10px;">
+                                <p class="error error--hidden"></p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card text-center" >
+                    <div class="card-header" >
+                        <h4>
+                            <a class="collapsed card-link" data-toggle="collapse" href="#accountCollapse" style="color:black">Create an Account</a>
+                        </h4>
+                        <hr class="pinkLine">
+                    </div>
+                    <div id="accountCollapse" class="collapse" data-parent="#accordion">
+                        <div class="card-body">
+                            <form name="signup_form">
+                                <label for="name">Name</label>
+                                <input type="text" name="name" class="field form-control centerShortField" maxlength="32" placeholder="Enter Name Here" required>
+                                <label for="email">Email</label>
+                                <input type="text" name="email" class="field form-control centerShortField" maxlength="32" placeholder="Enter Email Here" required>
+                                <label for="password">Password</label>
+                                <input type="password" name="password" class="field form-control centerShortField" maxlength="32" placeholder="Enter Password Here" required>
+                                <!--
+                                <label for="password2">Re-Enter Password</label>
+                                <input type="password" name="password2" class="field form-control centerShortField" maxlength="32" placeholder="Enter Password Here" required>
+                                <div style="padding-top: 10px;">-->
+                                <input type="submit" value="Sign Up" class="btn btn-primary" style="margin-top:10px">
+                                <p class="error error--hidden"></p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <div class="card text-center" style="padding:10px">
+                <h5>logged In</h5>
+                <hr class="pinkLine">
+                <a class="btn btn-primary" href="/dashboard/">Dashboard</a>
+            </div>
+            {% endif %}
+
+        </div>
+
+        <div class="col-md-8">
+            <div class="container text-center">
+                <div class="jumbotron">
+                    <h2>More content will be added here later.</h1>
+                </div>   
+            </div>      
+        </div>
+        
     </div>
 {% endblock %}
