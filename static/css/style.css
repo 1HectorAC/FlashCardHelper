@@ -29,3 +29,13 @@ body{
     background-color: #fda1a1;
 }
 
+.brownButton{
+    background-color: #b94f4f;
+    color:white;
+  
+}
+.brownButton:hover{
+    background-color:rgb(234, 115, 115);
+    color:white;
+    text-decoration: none;
+  }
