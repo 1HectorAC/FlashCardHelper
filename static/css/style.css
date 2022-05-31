@@ -2,6 +2,7 @@ body{
     background-image: linear-gradient(to right, #f78ca0 0%, #f9748f 19%, #fd868c 60%, #fe9a8b 100%);
 }
 
+/** Header panels. **/
 .header{
     margin: 20px;
     background-color:rgba(255, 170, 170, 0.5);
@@ -19,6 +20,13 @@ body{
     margin-bottom: 10px;
 }
 
+.brownPanel{
+    background-color:rgb(144, 78, 70, .70);
+    color:white;
+    padding:20px;
+}
+
+/* hr line styling. */
 .whiteLine{
     margin:5px;
     background-color:white
@@ -29,6 +37,13 @@ body{
     background-color: #fda1a1;
 }
 
+/** Text styling. **/
+.whiteTitleText{
+    color:white;
+    text-shadow: 1px 1px #b20d0d;
+}
+
+/** Button styling. **/
 .brownButton{
     background-color: #b94f4f;
     color:white;
@@ -38,4 +53,19 @@ body{
     background-color:rgb(234, 115, 115);
     color:white;
     text-decoration: none;
+  }
+
+.lPinkButton{
+    background-color:rgb(255, 227, 227);
+    color:rgb(94, 20, 20);
+  
+}
+.lPinkButton:hover{
+    background-color:rgb(234, 115, 115);
+    color:white;
+    text-decoration: none;
+  }
+
+  .boxButton1{
+    transform: scale(1.5);
   }
