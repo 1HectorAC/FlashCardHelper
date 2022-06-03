@@ -26,6 +26,22 @@ body{
     padding:20px;
 }
 
+.whitePanel{
+    padding:10px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 8px #a76256;
+    background-color:white;
+}
+
+.whiteBorder{
+    border-radius: 10px;
+    border-style:solid;
+    border-color:rgb(255, 255, 255);
+    padding:10px;
+    margin-top: 5px;
+}
+
+
 /* hr line styling. */
 .whiteLine{
     margin:5px;
