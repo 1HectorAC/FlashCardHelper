@@ -65,8 +65,18 @@ body{
     color:white;
   
 }
-.brownButton:hover{
+.brownButton:hover:enabled{
     background-color:rgb(234, 115, 115);
+    color:white;
+    text-decoration: none;
+  }
+  .brownButton:disabled{
+    background-color:rgb(255, 200, 199);
+    color:white;
+    text-decoration: none;
+  }
+  .brownButton:hover:disabled{
+    background-color:rgb(255, 200, 199);
     color:white;
     text-decoration: none;
   }
@@ -76,7 +86,7 @@ body{
     color:rgb(94, 20, 20);
   
 }
-.lPinkButton:hover{
+.lPinkButton:hover:enabled{
     background-color:rgb(234, 115, 115);
     color:white;
     text-decoration: none;

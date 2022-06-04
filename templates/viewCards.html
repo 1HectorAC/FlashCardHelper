@@ -7,36 +7,42 @@
     var cards = JSON.parse('{{ cards.cards | tojson }}');   
 </script>
 
-<div class="container">
-    <div class="jumbotron row text-center">
-        <div class="col-md-12 ">
-            <h1 style="display:inline">{{ cards.title }}  </h1><h4 style="display:inline">By: {{ cards.owner_name }}</h4>
 
+    <div class="row text-center">
+        <div class="col-sm-12 whiteTitleText">
+            <h1  style="display:inline">{{ cards.title }}  </h1><h4 style="display:inline">By: {{ cards.owner_name }}</h4>
+            <hr class="whiteLine" style="height:2px">
         </div>
-        <div class="col-md-2">
-            <input id="previousButton" class="btn" type="button" value="Previous" onclick="previousCard();" disabled/>
-        </div>
-        <div class="col-md-8">
-            <div id="introCard" style="background-color:white;margin:10px;">
-                <h5>Instructions</h5>
-                <p>Click on the card to flip it.</p>
-                <p>Use the Next and Previous button to change the card.</p>
-                <input id="startButton" class="btn btn-primary" type="button" value="Play" onclick="startCardView(cards);"/>
-            </div>
-            <div id="displayCard" style="background-color:white;margin:10px; display:none" onclick="cardFlip();">
-                <p style="margin:1px"><span id="index"></span>/<span id="total"></span></p>
-                <h4 id="problemLabel"></h4>
-                <h5 id="problemText"></h5>
-            </div>
 
-        </div>
-        <div class="col-md-2">
-            <input id="nextButton" class="btn" type="button" value="Next" onclick="nextCard();" disabled/>
+        <div class="col-sm-8 offset-sm-2">
+            <div class="whitePanel" id="introCard" style="margin-bottom:12px">
+                <h5>- Instructions -</h5>
+                <hr style="margin:5px">
+                <p><i>Click on the card to flip it.<br>Use the Next and Previous button to change the card.</i></p>
+                <input id="startButton" class="btn brownButton" type="button" value="View Flash Cards" onclick="startCardView(cards);"/>
+            </div>
+            <div class="whitePanel" id="displayCard" style="display:none;margin-bottom:12px" onclick="cardFlip();">
+                <p style="margin:0"><span id="index"></span>/<span id="total"></span></p>
+                <h5 id="problemLabel"></h5>
+                <hr style="margin:5px">
+                <p id="problemText" style="font-style:italic"></p>
+            </div>
 
         </div>
         
+        
+        <div class="col-sm-3 offset-sm-3">
+            <input id="previousButton" class="btn brownButton" style="width:100%; height:50px; display:none" type="button" value="Previous" onclick="previousCard();" disabled/>
+        </div>
+        <div class="col-sm-3">
+            <input id="nextButton" class="btn brownButton" style="width:100%; height: 50px; display:none" type="button" value="Next" onclick="nextCard();" disabled/>
+       </div>
+        
+
+
+        
     </div>
-</div>
+
 
 <script src="/static/js/viewCardsScript.js"></script>
 

@@ -17,6 +17,8 @@ function startCardView(cards){
     // Setup display if cards.
     $('#introCard').hide();
     $('#displayCard').show();
+    $('#nextButton').show();
+    $('#previousButton').show();
 }
 
 //Sets up change of diplayed question or answer text in html.
