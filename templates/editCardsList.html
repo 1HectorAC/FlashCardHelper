@@ -2,37 +2,67 @@
 
 {% block content %}
 
-    <h2 class="text-center">Edit Cards List</h2>
+<h1 class="whiteTitleText text-center">Edit Flash Cards</h1>
+<hr class="whiteLine" style="height:2px">
 
-    <div class="jumbotron text-center">
-        <h3>Cards List Info</h3>
-        <h5>Title: {{ cards.title }}</h5>
-        <h5>Description: {{ cards.description }}</h5>
-        <h5>Cards:</h5>
-        {% for x in cards.cards %}
-            <p><u>Q:</u> {{x.question}}
-            <u>A:</u> {{x.answer}}
-            <a class="btn btn-primary" href="/user/deleteCard/{{cards.title}}/{{ loop.index-1 }}">Delete</a>
+<!-- Card info section.-->
+<div class="whitePanel text-center" style="padding:10px; margin-bottom: 10px;">
+    <h3>Flash Card Info</h3>
+    <hr style="margin:5px">
+    <div class="row">
+        <div class="col-md-3">
+            <h5>Title</h5>
+            <p>{{ cards.title }}</p>
+        </div>
+        <div class="col-md-7">
+            <h5>Description</h5>
+            <p>{{ cards.description }}</p>
+        </div>
+        <div class="col-md-2">
+            <h5>View Setting</h5>
+            {% if cards.public %}
+            <p>Public</p>
+            {% else %}
+            <p>Private</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<!--
+<div class="whitePanel text-center" style="padding:10px; margin-bottom: 10px;">
+    <h3>Cards Edit</h3>
+    <hr style="margin:5px">
+
+</div>
+-->
+
+<div class="jumbotron text-center">
+    <h3>Cards List Info</h3>
+    <h5>Cards:</h5>
+    {% for x in cards.cards %}
+    <p><u>Q:</u> {{x.question}}
+        <u>A:</u> {{x.answer}}
+        <a class="btn btn-primary" href="/user/deleteCard/{{cards.title}}/{{ loop.index-1 }}">Delete</a>
         {% endfor %}
-        <div>
-            <a class="btn btn-primary" href="/dashboard/">Return to Dashboard</a>
-        </div>
-        
-
+    <div>
+        <a class="btn btn-primary" href="/dashboard/">Return to Dashboard</a>
     </div>
-    <div class="jumbotron text-center">
-        <h3>Add cards to Cards List</h3>
-        <div id="numberSection">
-            <p>Enter number of cards to add:</p>
-            <input id="questionTotal" type="number" name="questionTotal" max="99" min="1">
-            <input id="numberButton" class="btn" type="button" value="Enter" onclick="GenerateBoxes();" />
-        </div>
+</div>
 
-        <form name="addCard" id="questionSection" style="display:none">
-            <input type="hidden" id="cardsTitle" name="cardsTitle" value= {{ cards.title }}> 
-        </form>
-         
+<div class="jumbotron text-center">
+    <h3>Add cards to Cards List</h3>
+    <div id="numberSection">
+        <p>Enter number of cards to add:</p>
+        <input id="questionTotal" type="number" name="questionTotal" max="99" min="1">
+        <input id="numberButton" class="btn" type="button" value="Enter" onclick="GenerateBoxes();" />
     </div>
-   
-    
+
+    <form name="addCard" id="questionSection" style="display:none">
+        <input type="hidden" id="cardsTitle" name="cardsTitle" value={{ cards.title }}>
+    </form>
+
+</div>
+
+
 {% endblock %}
