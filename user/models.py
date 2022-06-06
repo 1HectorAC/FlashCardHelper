@@ -1,8 +1,9 @@
 from flask import Flask, jsonify, request, session, redirect
 from passlib.hash import pbkdf2_sha256
 import uuid
-from mongoengine import connect, Document, StringField, ListField, ReferenceField, DictField, BooleanField
+from mongoengine import connect, Document, StringField, ListField, DictField, BooleanField, DateTimeField
 from mongoengine.queryset.visitor import Q
+from datetime import datetime
 import json
 import os
 
@@ -21,6 +22,7 @@ class CardsList(Document):
     public = BooleanField()
     cards = ListField(DictField())
     owner_name = StringField(required = True)
+    timestamp = DateTimeField(default=datetime.utcnow)
 
 class User:
     def start_session(self,user):
@@ -134,9 +136,9 @@ class User:
 
         return redirect('/editCardsList/'+ cardTitle)
 
-# Get a users Cards.
+# Get a users Cards. Sorted by timestamp.
 def GetUsersCardsLists(userName):
-    usersCards = json.loads(CardsList.objects(owner_name = userName).to_json())
+    usersCards = json.loads(CardsList.objects(owner_name = userName).order_by('-timestamp').to_json())
     return usersCards
 
 # Get a single cards list.
