@@ -146,3 +146,7 @@ def GetSingleCardsList(userName, cardsTitle):
     cardsList = json.loads(CardsList.objects(Q(title = cardsTitle) & Q(owner_name = userName)).to_json())
     return cardsList[0]
         
+# Get all public flash card sets sorted by timestamp.
+def GetPublicCards():
+        publicCards = json.loads(CardsList.objects(public = True).order_by('-timestamp').to_json())
+        return publicCards

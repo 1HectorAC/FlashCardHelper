@@ -19,11 +19,16 @@ def login_required(f):
 
 #Routes
 from user import routes
-from user.models import GetUsersCardsLists, GetSingleCardsList
+from user.models import GetUsersCardsLists, GetSingleCardsList, GetPublicCards
 
 @app.route('/', methods=['GET'])
 def home():
-    return render_template('home.html')
+
+    #Get recent 6 public flash cards.
+    publicCards = GetPublicCards()
+    publicCards = publicCards[0:6]
+
+    return render_template('home.html', cards = publicCards)
 
 
 @app.route('/dashboard/', methods=['GET'])

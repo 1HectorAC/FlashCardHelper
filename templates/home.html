@@ -2,86 +2,110 @@
 
 {% block content %}
 
-    <div class="row">
-        <div class="col-md-12">
-            <div class=" text-center header2" >
-                <hr class="whiteLine">
-                <h5>
-                    Here at FCH we provide a quick and easy way to make digital flash cards! Just make an account and start making cards as fast as you can write them.
-                </h5>
-                <hr class="whiteLine">              
-            </div>
+<div class="row">
+    <!--Title section.-->
+    <div class="col-md-12">
+        <div class=" text-center header2">
+            <hr class="whiteLine">
+            <h5>
+                Here at FCH we provide a quick and easy way to make digital flash cards! Just make an account and start
+                making cards as fast as you can write them.
+            </h5>
+            <hr class="whiteLine">
         </div>
-        
+    </div>
 
-        <div class="col-md-4">
-            {% if not session['logged_in']%}
-            <div id="accordion">
-                <div class="card text-center" >
-                    <div class="card-header">
-                        <h4>
-                            <a class="card-link" data-toggle="collapse"  href="#loginCollapse" style="color:black">Log in</a>
-                        </h4>
+    <!--Loggin section.-->
+    <div class="col-md-4">
+        {% if not session['logged_in']%}
+        <div id="accordion">
+            <div class="card text-center">
+                <div class="card-header">
+                    <h4>
+                        <a class="card-link" data-toggle="collapse" href="#loginCollapse" style="color:black">Log in</a>
+                    </h4>
                     <hr class="pinkLine">
-                    </div>
-                    <div id="loginCollapse" class="collapse show" data-parent="#accordion">
-                        <div class="card-body">
-                            <form name="login_form">
-                                <label for="email">Email</label>
-                                <input type="text" name="email" class="field form-control centerShortField" maxlength="32" placeholder="Enter Email" required>
-                                <label for="password">Password</label>
-                                <input type="password" name="password" class="field form-control centerShortField"  maxlength="32" placeholder="Enter Password" required>
-                                <input type="submit" value="Log In" class="brownButton btn" style="margin-top: 10px;">
-                                <p class="error error--hidden"></p>
-                            </form>
-                        </div>
+                </div>
+                <div id="loginCollapse" class="collapse show" data-parent="#accordion">
+                    <div class="card-body">
+                        <form name="login_form">
+                            <label for="email">Email</label>
+                            <input type="text" name="email" class="field form-control centerShortField" maxlength="32"
+                                placeholder="Enter Email" required>
+                            <label for="password">Password</label>
+                            <input type="password" name="password" class="field form-control centerShortField"
+                                maxlength="32" placeholder="Enter Password" required>
+                            <input type="submit" value="Log In" class="brownButton btn" style="margin-top: 10px;">
+                            <p class="error error--hidden"></p>
+                        </form>
                     </div>
                 </div>
+            </div>
 
-                <div class="card text-center" >
-                    <div class="card-header" >
-                        <h4>
-                            <a class="collapsed card-link" data-toggle="collapse" href="#accountCollapse" style="color:black">Create an Account</a>
-                        </h4>
-                        <hr class="pinkLine">
-                    </div>
-                    <div id="accountCollapse" class="collapse" data-parent="#accordion">
-                        <div class="card-body">
-                            <form name="signup_form">
-                                <label for="name">Name</label>
-                                <input type="text" name="name" class="field form-control centerShortField" maxlength="32" placeholder="Enter Name Here" required>
-                                <label for="email">Email</label>
-                                <input type="text" name="email" class="field form-control centerShortField" maxlength="32" placeholder="Enter Email Here" required>
-                                <label for="password">Password</label>
-                                <input type="password" name="password" class="field form-control centerShortField" maxlength="32" placeholder="Enter Password Here" required>
-                                <!--
+            <div class="card text-center" style="margin-bottom:10px">
+                <div class="card-header">
+                    <h4>
+                        <a class="collapsed card-link" data-toggle="collapse" href="#accountCollapse"
+                            style="color:black">Create an Account</a>
+                    </h4>
+                    <hr class="pinkLine">
+                </div>
+                <div id="accountCollapse" class="collapse" data-parent="#accordion">
+                    <div class="card-body">
+                        <form name="signup_form">
+                            <label for="name">Name</label>
+                            <input type="text" name="name" class="field form-control centerShortField" maxlength="32"
+                                placeholder="Enter Name Here" required>
+                            <label for="email">Email</label>
+                            <input type="text" name="email" class="field form-control centerShortField" maxlength="32"
+                                placeholder="Enter Email Here" required>
+                            <label for="password">Password</label>
+                            <input type="password" name="password" class="field form-control centerShortField"
+                                maxlength="32" placeholder="Enter Password Here" required>
+                            <!--
                                 <label for="password2">Re-Enter Password</label>
                                 <input type="password" name="password2" class="field form-control centerShortField" maxlength="32" placeholder="Enter Password Here" required>
                                 <div style="padding-top: 10px;">-->
-                                <input type="submit" value="Sign Up" class="brownButton btn" style="margin-top:10px">
-                                <p class="error error--hidden"></p>
-                            </form>
-                        </div>
+                            <input type="submit" value="Sign Up" class="brownButton btn" style="margin-top:10px">
+                            <p class="error error--hidden"></p>
+                        </form>
                     </div>
                 </div>
             </div>
-            {% else %}
-            <div class="card text-center" style="padding:10px">
-                <h5>logged In</h5>
-                <hr class="pinkLine">
-                <a class="btn btn-primary" href="/dashboard/">Dashboard</a>
-            </div>
-            {% endif %}
-
         </div>
-
-        <div class="col-md-8">
-            <div class="container text-center">
-                <div class="jumbotron">
-                    <h2>More content will be added here later.</h1>
-                </div>   
-            </div>      
+        {% else %}
+        <div class="card text-center" style="padding:10px;margin-bottom:10px">
+            <h5>logged In</h5>
+            <hr class="pinkLine">
+            <a class="btn brownButton" href="/dashboard/">Dashboard</a>
         </div>
-        
+        {% endif %}
+
     </div>
+
+    <!--Recently Added section.-->
+    <div class="col-md-8">
+        <div class="container text-center">
+            <div class="whitePanel">
+                <h3>Recently Added</h3>
+                <hr>
+                <div class="row">
+                    {% for card in cards %}
+                    <div class="col-md-4">
+                        <a href="/viewCards/{{ card.owner_name }}/{{card.title}}" style="text-decoration: none;">
+                            <div class="pinkPanel">
+                                <h4 style="margin:2px"><b>{{ card.title }}</b></h4>
+                                <p style="margin:2px"> By {{card.owner_name}}</p>
+                                <hr style="margin:5px">
+                                <p style="margin:2px">-Description-</p>
+                                <p style="line-height:18px; margin:2px"><i>{{card.description}}</i></p>
+                            </div>
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
