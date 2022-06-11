@@ -87,19 +87,35 @@ $("form[name=addCard]").submit(function(e){
 
 // Make text boxes for entering questions and answer cards.
 function GenerateBoxes(){
-    $('#numberSection').hide()
     num = $('#questionTotal').val()
-    $('#questionSection').append('<p>Total:' + num + '</p>')
-    $('#questionSection').append('<p>Question and then Answer</p>')
+
+    // Error check for input length.
+    if(num < 1 || num > 99){
+        $('.error').text("Number must be between 1-99")
+        return;
+    }
+
+    $('#numberSection').hide()
+
+    $('#questionSection').append('<p style="display:inline-block; width:50%">Questions</p>')
+    $('#questionSection').append('<p style="display:inline-block; width:50%">Answers</p>')
 
     for(let i = 0; i < num; i++){
-        card = $('<div>')
-        questionPart = $('<input type="text" class="questionPart" name="questionPart" required>')
-        answerPart = $('<input type="text" class="answerPart" name="answerPart" required>')
+        card = $('<div class="row">')
+        // Setup Question part
+        questionPart = $('<div class="col-md-6">')
+        questionPart.append('<p style="margin:2px">Q'+(i+1)+'</p>')
+        questionPart.append($('<input type="text" class="questionPart form form-control" name="questionPart" maxlength="100" required>'))
+
+        // Setup Answer part
+        answerPart = $('<div class="col-md-6">')
+        answerPart.append('<p style="margin:2px">A'+(i+1)+'</p>')
+        answerPart.append($('<input type="text" class="answerPart form form-control" name="answerPart" maxlength="100" required>'))
+
         card.append(questionPart)
         card.append(answerPart)
         $('#questionSection').append(card)
     }
-    $('#questionSection').append('<input type="submit" value="Enter" class="btn btn-primary"></input>')
+    $('#questionSection').append('<input type="submit" value="Enter" class="btn lPinkButton" style="margin-top:10px"></input>')
     $('#questionSection').show()
 }

@@ -29,6 +29,27 @@
     </div>
 </div>
 
+<!-- Section to add cards. -->
+<div class="container text-center">
+    <div class="brownPanel card" style="margin-bottom:10px">
+        <div class="text-center">
+            <h4><a data-toggle="collapse" href="#AddCards" style="color:white">&lt; Add Cards &gt;</a></h4>
+        </div>
+        <div id="AddCards" class="collapse">
+            <hr style="background-color:rgba(139, 77, 70, 0.7)">
+                <div id="numberSection">
+                    <h5 style="margin:5px">Enter how many cards to add:</h5>
+                    <input type="number" id="questionTotal" name="questionTotal" class="form form-control mx-auto" style="  width:65px; margin:5px" required>
+                    <input id="numberButton" class="btn lPinkButton" type="button" value="Enter"  onclick="GenerateBoxes();" />
+                    <p class="error error--hidden" style="color:rgb(255, 177, 177)"></p>
+                </div>
+                <form name="addCard" id="questionSection" style="display:none">
+                    <input type="hidden" id="cardsTitle" name="cardsTitle" value={{ cards.title }}>
+                </form>
+        </div>
+    </div>
+</div>
+
 <!--
 <div class="whitePanel text-center" style="padding:10px; margin-bottom: 10px;">
     <h3>Cards Edit</h3>
@@ -49,20 +70,5 @@
         <a class="btn btn-primary" href="/dashboard/">Return to Dashboard</a>
     </div>
 </div>
-
-<div class="jumbotron text-center">
-    <h3>Add cards to Cards List</h3>
-    <div id="numberSection">
-        <p>Enter number of cards to add:</p>
-        <input id="questionTotal" type="number" name="questionTotal" max="99" min="1">
-        <input id="numberButton" class="btn" type="button" value="Enter" onclick="GenerateBoxes();" />
-    </div>
-
-    <form name="addCard" id="questionSection" style="display:none">
-        <input type="hidden" id="cardsTitle" name="cardsTitle" value={{ cards.title }}>
-    </form>
-
-</div>
-
 
 {% endblock %}
