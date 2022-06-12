@@ -7,7 +7,7 @@
 
 <!-- Card info section.-->
 <div class="whitePanel text-center" style="padding:10px; margin-bottom: 10px;">
-    <h3>Flash Card Info</h3>
+    <h3>Flash Cards Info</h3>
     <hr style="margin:5px">
     <div class="row">
         <div class="col-md-3">
@@ -37,37 +37,47 @@
         </div>
         <div id="AddCards" class="collapse">
             <hr style="background-color:rgba(139, 77, 70, 0.7)">
-                <div id="numberSection">
-                    <h5 style="margin:5px">Enter how many cards to add:</h5>
-                    <input type="number" id="questionTotal" name="questionTotal" class="form form-control mx-auto" style="  width:65px; margin:5px" required>
-                    <input id="numberButton" class="btn lPinkButton" type="button" value="Enter"  onclick="GenerateBoxes();" />
-                    <p class="error error--hidden" style="color:rgb(255, 177, 177)"></p>
-                </div>
-                <form name="addCard" id="questionSection" style="display:none">
-                    <input type="hidden" id="cardsTitle" name="cardsTitle" value={{ cards.title }}>
-                </form>
+            <div id="numberSection">
+                <h5 style="margin:5px">Enter how many cards to add:</h5>
+                <input type="number" id="questionTotal" name="questionTotal" class="form form-control mx-auto"
+                    style="  width:65px; margin:5px" required>
+                <input id="numberButton" class="btn lPinkButton" type="button" value="Enter"
+                    onclick="GenerateBoxes();" />
+                <p class="error error--hidden" style="color:rgb(255, 177, 177)"></p>
+            </div>
+            <form name="addCard" id="questionSection" style="display:none">
+                <input type="hidden" id="cardsTitle" name="cardsTitle" value={{ cards.title }}>
+            </form>
         </div>
     </div>
 </div>
 
-<!--
+<!-- Section to edit individual cards-->
 <div class="whitePanel text-center" style="padding:10px; margin-bottom: 10px;">
     <h3>Cards Edit</h3>
-    <hr style="margin:5px">
-
-</div>
--->
-
-<div class="jumbotron text-center">
-    <h3>Cards List Info</h3>
-    <h5>Cards:</h5>
-    {% for x in cards.cards %}
-    <p><u>Q:</u> {{x.question}}
-        <u>A:</u> {{x.answer}}
-        <a class="btn btn-primary" href="/user/deleteCard/{{cards.title}}/{{ loop.index-1 }}">Delete</a>
-        {% endfor %}
-    <div>
-        <a class="btn btn-primary" href="/dashboard/">Return to Dashboard</a>
+    <div class="container">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Question</th>
+                    <th scope="col">Answer</th>
+                    <th scope="col">Option</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for x in cards.cards %}
+                <tr>
+                    <th scope="row">{{ loop.index }}</th>
+                    <td>{{ x.question }}</td>
+                    <td>{{ x.answer }}</td>
+                    <td>
+                        <a class="btn brownButton" href="/user/deleteCard/{{cards.title}}/{{ loop.index-1 }}">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 </div>
 
