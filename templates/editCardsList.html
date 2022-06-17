@@ -72,8 +72,29 @@
                     <td>{{ x.question }}</td>
                     <td>{{ x.answer }}</td>
                     <td>
-                        <a class="btn brownButton" href="/user/deleteCard/{{cards.title}}/{{ loop.index-1 }}">Delete</a>
+                        <input class="btn brownButton" type="button" value="Edit"
+                            onclick="toggleEditCard( {{ loop.index }} );" />
+                        <a class="btn brownButton" href="/user/deleteCard/{{cards.title}}/{{ loop.index-1 }}">-</a>
                     </td>
+                </tr>
+                <tr id="cardDropdown{{loop.index}}" style="display:none">
+                    <form name="editCard">
+                        <input type="hidden" id="cardsTitle" name="cardsTitle" value={{ cards.title }}>
+                        <input type="hidden" id="cardIndex" name="cardIndex" value={{ loop.index }}>
+                        <th></th>
+                        <td>
+                            <input type="text" class="form form-control" name="questionEdit" maxlength="100"
+                                value="{{x.question}}" required>
+                        </td>
+                        <td>
+                            <input type="text" class="form form-control" name="answerEdit" maxlength="100"
+                                value="{{x.answer}}" required>
+                        </td>
+                        <td>
+                            <input class="btn brownButton" type="submit" value="Save" />
+                        </td>
+                    </form>
+
                 </tr>
                 {% endfor %}
             </tbody>
