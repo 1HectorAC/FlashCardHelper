@@ -31,3 +31,6 @@ def addCard():
 def deleteCard(title:str, cardNumber:int):
     return User().RemoveCard(title, cardNumber)
 
+@app.route("/user/editCard", methods=["POST"])
+def editCard():
+    return User().EditCard()

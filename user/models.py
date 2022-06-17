@@ -136,6 +136,25 @@ class User:
 
         return redirect('/editCardsList/'+ cardTitle)
 
+    # Edit a card from cards list.
+    def EditCard(self):
+        # Set form variables.
+        questionEdit = request.form.get('questionEdit')
+        answerEdit = request.form.get('answerEdit')
+        cardsTitle = request.form.get('cardsTitle')
+        cardIndex = int(request.form.get('cardIndex')) - 1
+
+        if(questionEdit == '' or answerEdit == '' or cardsTitle == '' or cardIndex == ''):
+            return jsonify({'success': 'Sucess'}), 200
+        
+        # Get cards, edit and save.
+        cardsData = json.loads(CardsList.objects.get(title = cardsTitle).to_json())
+        cards = cardsData['cards']
+        cards[cardIndex] = {'question':questionEdit, 'answer': answerEdit}
+        CardsList.objects(title = cardsTitle).update_one(set__cards = cards)
+
+        return jsonify({'success': 'Sucess'}), 200
+
 # Get a users Cards. Sorted by timestamp.
 def GetUsersCardsLists(userName):
     usersCards = json.loads(CardsList.objects(owner_name = userName).order_by('-timestamp').to_json())
