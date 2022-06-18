@@ -46,29 +46,35 @@
     </div>
 </div>
 
-<div class="whiteBorder">
-    <h3 class="text-center">Your Flash Cards</h3>
-    <div class="row">
-        {% for cards in cardsLists %}
-        <div class="col-md-3">
-            <div class="whitePanel text-center">
-                <h5>
-                    {{ cards.title }}
-                    <span style="font-size: 15px;">
-                        ({% if cards.public%}Public{% else %}Private{% endif %})
-                    </span>
-                </h5>
-                <hr class="brownLine" style="margin:1px">
-                <p style="margin:1px; font-style: italic;">-Description-</p>
-                <p style="line-height:90%">{{cards.description}}</p>
-                <div>
-                    <a class="btn brownButton" href="/viewCards/{{ cards['owner_name'] }}/{{cards['title']}}">View</a>
-                    <a class="btn brownButton" href="/editCardsList/{{cards['title']}}">Edit</a>
-                    <a class="btn brownButton" href="/user/deleteCards/{{cards['title']}}">-</a>
+<!-- Section to see and edit users flashcard sets-->
+<div class="container" style="margin-top:10px;">
+    <div class="whitePanel text-center">
+        <h3>Your Flash Cards</h3>
+        <hr style="margin:5px">
+        <div class="row">
+            {% for cards in cardsLists %}
+            <div class="col-md-3">
+                <div class="pinkPanel2">
+                    <h5>
+                        {{ cards.title }}
+                        <span style="font-size: 15px;">
+                            ({% if cards.public%}Public{% else %}Private{% endif %})
+                        </span>
+                    </h5>
+                    <hr class="brownLine" style="margin:1px">
+                    <p style="margin:1px; font-style: italic;">-Description-</p>
+                    <p style="line-height:90%">{{cards.description}}</p>
+                    <div>
+                        <a class="btn brownButton"
+                            href="/viewCards/{{ cards['owner_name'] }}/{{cards['title']}}">View</a>
+                        <a class="btn brownButton" href="/editCardsList/{{cards['title']}}">Edit</a>
+                        <a class="btn brownButton" href="/user/deleteCards/{{cards['title']}}">-</a>
+                    </div>
                 </div>
             </div>
+            {% endfor %}
         </div>
-        {% endfor %}
     </div>
 </div>
+
 {% endblock %}

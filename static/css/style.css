@@ -53,6 +53,13 @@ body{
     text-decoration: none;
 }
 
+.pinkPanel2{
+    background-color:rgb(252, 155, 143);
+    color: white;
+    border-radius: 10px;
+    padding:5px;
+    margin-bottom: 10px;
+}
 
 /* hr line styling. */
 .whiteLine{
