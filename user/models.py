@@ -136,6 +136,33 @@ class User:
 
         return redirect('/editCardsList/'+ cardTitle)
 
+    # Edit a cards list.
+    def EditCards(self):
+        # Set form variables.
+        newTitle = request.form.get('title')
+        oldTitle = request.form.get('oldTitle')
+        newDescription = request.form.get('description')
+        newPublic = True if request.form.get('public') == "true" else False
+        
+        cardsData = GetSingleCardsList(session['user']['userName'], oldTitle)
+
+        # Edit description if changed.
+        if(newDescription != cardsData['description']):
+            CardsList.objects(Q(title = oldTitle) & Q(owner_name = session['user']['userName'])).update_one(set__description = newDescription)
+        # Edit public if changed.
+        if(newPublic != cardsData['public']):
+            CardsList.objects(Q(title = oldTitle) & Q(owner_name = session['user']['userName'])).update_one(set__public = newPublic)
+        # Edit title if changed.
+        if(newTitle != oldTitle):
+            # Check if title of cards already exits by owner.
+            titleCheck = True if len(json.loads(CardsList.objects(Q(title = newTitle) & Q(owner_name = session['user']['userName'])).to_json())) == 0 else False
+            if(titleCheck):
+                CardsList.objects(Q(title = oldTitle) & Q(owner_name = session['user']['userName'])).update_one(set__title = newTitle)
+            else:
+                return jsonify({'error': 'Title already used.'}), 401
+        
+        return jsonify({'success': 'Sucess'}), 200
+
     # Edit a card from cards list.
     def EditCard(self):
         # Set form variables.
