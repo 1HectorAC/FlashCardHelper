@@ -85,7 +85,7 @@ $("form[name=addCard]").submit(function (e) {
     e.preventDefault();
 });
 
-// Handle form to add a card.
+// Handle form to edit a card.
 $("form[name=editCard]").submit(function (e) {
     var $form = $(this);
     var $error = $form.find(".error");
@@ -103,6 +103,26 @@ $("form[name=editCard]").submit(function (e) {
         }
     });
 
+    e.preventDefault();
+});
+
+// Handle form to add a cards set.
+$("form[name=editCards]").submit(function (e) {
+    var $form = $(this);
+    var $error = $form.find(".error");
+    var data = $form.serialize();
+    $.ajax({
+        url: "/user/editCards",
+        type: "POST",
+        data: data,
+        dataType: "json",
+        success: function (resp) {
+            window.location.href = "/dashboard/";
+        },
+        error: function (resp) {
+            $error.text(resp.responseJSON.error).removeClass("error--hidden");
+        }
+    });
     e.preventDefault();
 });
 
