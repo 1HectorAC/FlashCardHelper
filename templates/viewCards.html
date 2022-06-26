@@ -16,9 +16,12 @@
     <!--Card section.-->
     <div class="col-sm-8 offset-sm-2">
         <div class="whitePanel" id="introCard" style="margin-bottom:12px">
+            <h5>- Description -</h5>
+            <hr style="margin:5px">
+            <p><i>{{ cards.description }}</i></p>
             <h5>- Instructions -</h5>
             <hr style="margin:5px">
-            <p><i>Click on the card to flip it.<br>Use the Next and Previous button to change the card.</i></p>
+            <p><i>Click on the card to flip it.<br>Use the Next and Previous button to change cards.</i></p>
             <input id="startButton" class="btn brownButton" type="button" value="View Flash Cards"
                 onclick="startCardView(cards);" />
         </div>
