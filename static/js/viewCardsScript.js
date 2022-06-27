@@ -7,13 +7,21 @@ var flashCards = [];
 function startCardView(cards){
     flashCards = cards
     cardsSize = flashCards.length;
+
+    //Shuffle cards check.
+    if($('#shuffleCheck').prop('checked'))
+        flashCards = shuffleArray(flashCards);
+
+    //Edit some text.
     $('#index').text(1);
     $('#total').text(cardsSize);
     $('#problemLabel').text("Question");
     $('#problemText').text(flashCards[index].question);
+
     // Enable next next button if there is more than one card in the flashCards.
     if(flashCards.length > 1)
         $('#nextButton').prop('disabled', false)  
+
     // Setup display if cards.
     $('#introCard').hide();
     $('#displayCard').show();
@@ -70,3 +78,19 @@ function previousCard(){
         $('#problemText').text(flashCards[index].question);
     }
 }
+
+// shuffle array funciton.
+function shuffleArray(array) {
+    let curId = array.length;
+    // There remain elements to shuffle
+    while (0 !== curId) {
+      // Pick a remaining element
+      let randId = Math.floor(Math.random() * curId);
+      curId -= 1;
+      // Swap it with the current element.
+      let tmp = array[curId];
+      array[curId] = array[randId];
+      array[randId] = tmp;
+    }
+    return array;
+  }
