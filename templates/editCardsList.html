@@ -27,6 +27,41 @@
             {% endif %}
         </div>
     </div>
+    
+    <form name="editCards">
+        <input type="hidden" id="oldTitle" name="oldTitle" value={{ cards.title }}>
+        <div class="form-row">
+            <div class="form-group col-md-3">
+                <label for="title" hidden>Title</label>
+                <input type="text" name="title" class="form form-control" maxlength="40"
+                value="{{ cards.title }}" placeholder="Enter Title Here"  required>
+            </div>
+            <div class="form-group col-md-7">
+                <label for="description" hidden>Description</label>
+                <input type="text" name="description" class="form form-control" maxlength="100"
+                    value="{{ cards.description }}" placeholder="Enter Description Here" required>
+            </div>
+            <div class="form-group col-md-2">
+                <p hidden>View Setting</p>
+                <div class="form-check">
+                    <!--Check if pre checked or not. -->
+                    {% if cards.public %}
+                    <input class="form-check-input boxButton1" type="checkbox" value="true" id="public"
+                    name="public" checked>                    
+                    {% else %}
+                    <input class="form-check-input boxButton1" type="checkbox" value="true" id="public"
+                    name="public">
+                    {% endif %}
+                    <label class="form-check-label" for="public">Public</label>
+                </div>
+            </div>
+        </div>
+        <div class="center">
+            <input type="submit" value="Enter" class="btn lPinkButton">
+            <p class="error error--hidden" style="color:red"></p>
+        </div>
+    </form>
+
 </div>
 
 <!-- Section to add cards. -->
