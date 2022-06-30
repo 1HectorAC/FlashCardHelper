@@ -26,6 +26,8 @@ function startCardView(cards) {
     if (flashCards.length > 1)
         $('#nextButton').prop('disabled', false)
 
+    generateNumbers(cardsSize);
+
     // Setup display if cards.
     $('#introCard').hide();
     $('#displayCard').show();
@@ -79,6 +81,40 @@ function previousCard() {
         $('#index').text(index + 1);
         $('#problemLabel').text("Question");
         $('#problemText').text(flashCards[index].question);
+    }
+}
+
+//Create buttons with just numbers.
+function generateNumbers(num){
+    for(let i = 0; i < num; i++){
+        $('#numberButtons').append('<button class="btn brownButton" onclick="numberButton('+i+')" style="display:inline; margin: 5px">'+(i+1)+'</button>')
+    }
+}
+
+// Change view of card based on button.
+function numberButton(num){
+    // Out of bounds check.
+    if(num >= cardsSize || num < 0)
+        return;
+
+    // Set variables.
+    index = num;
+    $('#problemLabel').text("Question");
+    $('#problemText').text(flashCards[index].question);
+    $('#index').text(index + 1);
+
+    // Disable or Enable the next/previous button depending on index location.
+    if(index == cardsSize -1){
+        $('#nextButton').prop('disabled', true)
+        $('#previousButton').prop('disabled', false)
+    }
+    else if(index == 0){
+        $('#previousButton').prop('disabled', true)
+        $('#nextButton').prop('disabled', false)
+    }
+    else{
+        $('#nextButton').prop('disabled', false)
+        $('#previousButton').prop('disabled', false)
     }
 }
 
