@@ -201,4 +201,8 @@ def GetPublicCards():
 def GetCardsByTitleSearch():
     cardTitle = request.form.get('title')
     cardsList= json.loads( CardsList.objects(Q(public = True) & Q(title__contains = cardTitle)).to_json())
-    return cardsList
+    #Check if list exits and return empty one if not.
+    if(cardsList):
+        return cardsList
+    else:
+        return []
