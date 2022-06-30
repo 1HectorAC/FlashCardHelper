@@ -1,5 +1,5 @@
 from typing_extensions import Required
-from flask import Flask, render_template, redirect, session
+from flask import Flask, render_template, redirect, session,request
 from functools import wraps
 import os
 import json
@@ -19,7 +19,7 @@ def login_required(f):
 
 #Routes
 from user import routes
-from user.models import GetUsersCardsLists, GetSingleCardsList, GetPublicCards
+from user.models import GetUsersCardsLists, GetSingleCardsList, GetPublicCards,GetCardsByTitleSearch
 
 @app.route('/', methods=['GET'])
 def home():
@@ -59,3 +59,14 @@ def ViewCards(name:str,title:str):
             return redirect('/')
 
     return render_template('viewCards.html', cards = cardsList)
+
+@app.route('/searchCards/', methods=['GET'])
+def getSearchCards():  
+    return render_template('searchCards.html')
+
+
+@app.route('/searchCards/', methods=['POST'])
+def postSearchCards():
+    cardsLists = GetCardsByTitleSearch()
+    titleSearch = request.form.get('title')
+    return render_template('searchCards.html', cards = cardsLists, titleSearch = titleSearch)

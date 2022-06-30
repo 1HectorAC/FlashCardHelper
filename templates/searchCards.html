@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!-- Search Bar Section -->
+<div class="whitePanel">
+    <div class="container">
+        <h1 class="text-center">Cards Search</h1>
+        <form action="/searchCards/" method="post">
+            <div class="form-row" style="color:white">
+                <div class="form-group col-md-6 offset-md-2">
+                    <label for="title" hidden>Title</label>
+                    <input type="text" name="title" class="form form-control" maxlength="50"
+                        placeholder="Enter Title Here" required>
+                </div>
+                <div class="form-group col-md-2">
+                    <input type="submit" value="Enter" class="btn brownButton form form-control">
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+<!-- Search Result Section-->
+{% if titleSearch %}
+<div class="whitePanel" style="margin-top:10px">
+    <div class="container text-center">
+        <h5 class="text-left">Search Results For: {{titleSearch}}</h5>
+        <hr>
+        {% if cards|length ==0 %}
+        <p>No Results</p>
+        {% else %}
+        <div class="row">
+            {% for card in cards %}
+            <div class="col-md-3">
+                <a href="/viewCards/{{ card.owner_name }}/{{card.title}}" style="text-decoration: none;">
+                    <div class="pinkPanel">
+                        <h4 style="margin:2px"><b>{{ card.title }}</b></h4>
+                        <p style="margin:2px"> By {{card.owner_name}}</p>
+                        <hr style="margin:5px">
+                        <p style="margin:2px">-Description-</p>
+                        <p style="line-height:18px; margin:2px"><i>{{card.description}}</i></p>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+{%endif%}
+{% endblock %}
