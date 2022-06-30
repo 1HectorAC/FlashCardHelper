@@ -169,3 +169,9 @@ def GetSingleCardsList(userName, cardsTitle):
 def GetPublicCards():
         publicCards = json.loads(CardsList.objects(public = True).order_by('-timestamp').to_json())
         return publicCards
+
+# Get a list of cards based on search of titles.
+def GetCardsByTitleSearch():
+    cardTitle = request.form.get('title')
+    cardsList= json.loads( CardsList.objects(Q(public = True) & Q(title__contains = cardTitle)).to_json())
+    return cardsList
