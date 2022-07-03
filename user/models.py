@@ -182,6 +182,32 @@ class User:
 
         return jsonify({'success': 'Sucess'}), 200
 
+    # Edit UserName of a CardsUser.
+    def EditName(self):
+        formName = request.form.get('userName')
+
+        # No change to name check
+        if(formName == session['user']['userName']):
+            return jsonify({'error': 'No Change to userName'}), 400
+
+        # Unique username check.
+        nameExitsCheck = CardsUser.objects(userName = formName)
+        if(nameExitsCheck):
+            return jsonify({'error': 'UserName Already Exits'}), 400
+
+        # Check form name Length
+        if(len(formName) < 1 or len(formName) > 32):
+                return jsonify({"error": "userName needs to be 1-32 characters"}), 400
+
+        CardsUser.objects(userName = session['user']['userName']).update_one(set__userName = formName)
+
+        # Update session var with name.
+        session.modified = True
+        session['user']['userName'] = formName
+
+        return jsonify({"success": 'Sucess'}), 200
+
+
 # Get a users Cards. Sorted by timestamp.
 def GetUsersCardsLists(userName):
     usersCards = json.loads(CardsList.objects(owner_name = userName).order_by('-timestamp').to_json())
