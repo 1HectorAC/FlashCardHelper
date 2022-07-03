@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1 class="whiteTitleText text-center">Edit User Information</h1>
+<hr class="whiteLine" style="height:2px">
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-10 offset-md-1">
+            <div class="whitePanel text-center" id="accordion">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card">
+                            <h5>UserName</h5>
+                            <hr style="margin:2px">
+                            <p>{{session['user']['userName']}}</p>
+                            <a data-toggle="collapse" href="#name">Edit UserName</a>
+                            <div id="name" class="collapse" data-parent="#accordion">
+                                <form name="editName">
+                                    <label for="userName" hidden>userName</label>
+                                    <input type="text" name="userName" class="form form-control" maxlength="32"
+                                        value="{{ session['user']['userName'] }}" value="{{session['user']['userName']}}"
+                                        placeholder="Enter Name Here" required>
+                                    <input type="submit" value="Enter" class="btn brownButton" style="margin-top: 10px">
+                                    <p class="error error--hidden" style="color:red"></p>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <h5>Email</h5>
+                            <hr style="margin:2px">
+                            <p>{{session['user']['email']}}</p>
+                            <!--
+                            <a data-toggle="collapse" href="#email">Edit Email</a>
+                            <div class="collapse" id="email" data-parent="#accordion">
+                                <label for="email" hidden>email</label>
+                                <input type="text" name="email" class="form form-control" maxlength="32"
+                                    value="{{ session['user']['email'] }}" value="{{session['user']['email']}}"
+                                    placeholder="Enter email Here" required>
+                                <input type="submit" value="Enter" class="btn lPinkButton">
+                                <p class="error error--hidden"></p>
+                            </div>-->
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <h5>Password</h5>
+                            <hr style="margin:2px">
+                            <p><i>-Hidden-</i></p>
+                            <!--
+                            <a data-toggle="collapse" href="#password">Change Password</a>
+                            <div class="collapse" id="password" data-parent="#accordion">
+                                <label for="password">Password</label>
+                                <input type="password" name="password" class="field form-control" maxlength="32"
+                                    placeholder="Enter Password Here" required>
+                            </div>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
