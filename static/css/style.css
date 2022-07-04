@@ -1,116 +1,124 @@
-body{
+body {
     background-image: linear-gradient(to right, #f78ca0 0%, #f9748f 19%, #fd868c 60%, #fe9a8b 100%);
 }
 
 /** Header panels. **/
-.header{
+.header {
     margin: 20px;
-    background-color:rgba(255, 170, 170, 0.5);
-    color:white; padding:10px;
+    background-color: rgba(255, 170, 170, 0.5);
+    color: white;
+    padding: 10px;
     border-radius: 10px;
     text-shadow: 2px 2px #b20d0d;
 }
 
-.header2{
+.header2 {
     padding: 20px;
-    font-style:italic;
+    font-style: italic;
     background-color:
-    rgb(144, 78, 70, .70);
+        rgb(144, 78, 70, .70);
     color: white;
     margin-bottom: 10px;
 }
 
-.brownPanel{
-    background-color:rgb(144, 78, 70, .70);
-    color:white;
-    padding:20px;
+.brownPanel {
+    background-color: rgb(144, 78, 70, .70);
+    color: white;
+    padding: 20px;
 }
 
-.whitePanel{
-    padding:10px;
+.whitePanel {
+    padding: 10px;
     border-radius: 10px;
     box-shadow: 5px 5px 8px #a76256;
-    background-color:white;
+    background-color: white;
 }
 
-.whiteBorder{
+.whiteBorder {
     border-radius: 10px;
-    border-style:solid;
-    border-color:rgb(255, 255, 255);
-    padding:10px;
+    border-style: solid;
+    border-color: rgb(255, 255, 255);
+    padding: 10px;
     margin-top: 5px;
 }
-.pinkPanel{
-    background-color:rgb(252, 155, 143);
+
+.pinkPanel {
+    background-color: rgb(252, 155, 143);
     color: white;
     border-radius: 10px;
-    padding:5px;
-    
+    padding: 5px;
+
     margin-bottom: 10px;
 }
-.pinkPanel:hover{
+
+.pinkPanel:hover {
     background-color: rgb(232, 126, 126);
     text-decoration: none;
 }
 
-.pinkPanel2{
-    background-color:rgb(252, 155, 143);
+.pinkPanel2 {
+    background-color: rgb(252, 155, 143);
     color: white;
     border-radius: 10px;
-    padding:5px;
+    padding: 5px;
     margin-bottom: 10px;
 }
 
 /* hr line styling. */
-.whiteLine{
-    margin:5px;
-    background-color:white
+.whiteLine {
+    margin: 5px;
+    background-color: white
 }
 
-.pinkLine{
-    margin:5px;
+.pinkLine {
+    margin: 5px;
     background-color: #fda1a1;
 }
 
 /** Text styling. **/
-.whiteTitleText{
-    color:white;
+.whiteTitleText {
+    color: white;
     text-shadow: 1px 1px #b20d0d;
 }
 
 /** Button styling. **/
-.brownButton{
+.brownButton {
     background-color: #b94f4f;
-    color:white;
-  
+    color: white;
+    font-weight: 550;
 }
-.brownButton:hover:enabled{
-    background-color:rgb(234, 115, 115);
-    color:white;
-    text-decoration: none;
-  }
-  .brownButton:disabled{
-    background-color:rgb(255, 200, 199);
-    color:white;
-    text-decoration: none;
-  }
-  .brownButton:hover:disabled{
-    background-color:rgb(255, 200, 199);
-    color:white;
-    text-decoration: none;
-  }
 
-.lPinkButton{
-    background-color:rgb(255, 227, 227);
-    color:rgb(94, 20, 20);
-  
+.brownButton:hover {
+    background-color: rgb(234, 115, 115);
+    color: white;
+    text-decoration: none;
 }
-.lPinkButton:hover:enabled{
-    background-color:rgb(234, 115, 115);
-    color:white;
-    text-decoration: none;
-  }
 
-  .boxButton1{
+.brownButton:disabled {
+    background-color: rgb(255, 200, 199);
+    color: white;
+    text-decoration: none;
+}
+
+.brownButton:hover:disabled {
+    background-color: rgb(255, 200, 199);
+    color: white;
+    text-decoration: none;
+}
+
+.lPinkButton {
+    background-color: rgb(255, 227, 227);
+    color: rgb(145, 50, 50);
+    font-weight: 550;
+
+}
+
+.lPinkButton:hover {
+    background-color: rgb(234, 115, 115);
+    color: white;
+    text-decoration: none;
+}
+
+.boxButton1 {
     transform: scale(1.5);
-  }
+}
