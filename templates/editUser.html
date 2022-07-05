@@ -19,8 +19,8 @@
                                 <form name="editName">
                                     <label for="userName" hidden>userName</label>
                                     <input type="text" name="userName" class="form form-control" maxlength="32"
-                                        value="{{ session['user']['userName'] }}" value="{{session['user']['userName']}}"
-                                        placeholder="Enter Name Here" required>
+                                        value="{{ session['user']['userName'] }}" placeholder="Enter Name Here"
+                                        required>
                                     <input type="submit" value="Enter" class="btn brownButton" style="margin-top: 10px">
                                     <p class="error error--hidden" style="color:red"></p>
                                 </form>
@@ -32,16 +32,16 @@
                             <h5>Email</h5>
                             <hr style="margin:2px">
                             <p>{{session['user']['email']}}</p>
-                            <!--
                             <a data-toggle="collapse" href="#email">Edit Email</a>
-                            <div class="collapse" id="email" data-parent="#accordion">
-                                <label for="email" hidden>email</label>
-                                <input type="text" name="email" class="form form-control" maxlength="32"
-                                    value="{{ session['user']['email'] }}" value="{{session['user']['email']}}"
-                                    placeholder="Enter email Here" required>
-                                <input type="submit" value="Enter" class="btn lPinkButton">
-                                <p class="error error--hidden"></p>
-                            </div>-->
+                            <div id="email" class="collapse" data-parent="#accordion">
+                                <form name="editEmail">
+                                    <label for="email" hidden>email</label>
+                                    <input type="text" name="email" class="form form-control" maxlength="32"
+                                        value="{{ session['user']['email'] }}" placeholder="Enter email Here" required>
+                                    <input type="submit" value="Enter" class="btn brownButton" style="margin-top: 10px">
+                                    <p class="error error--hidden" style="color:red"></p>
+                                </form>
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -59,6 +59,7 @@
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
