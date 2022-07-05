@@ -42,3 +42,7 @@ def editCard():
 @app.route("/user/editName", methods=["POST"])
 def editName():
     return User().EditName()
+
+@app.route("/user/editEmail", methods=["POST"])
+def editEmail():
+    return User().EditEmail()

@@ -186,7 +186,7 @@ class User:
     def EditName(self):
         formName = request.form.get('userName')
 
-        # No change to name check
+        # No change to name check.
         if(formName == session['user']['userName']):
             return jsonify({'error': 'No Change to userName'}), 400
 
@@ -195,7 +195,7 @@ class User:
         if(nameExitsCheck):
             return jsonify({'error': 'UserName Already Exits'}), 400
 
-        # Check form name Length
+        # Check form name Length.
         if(len(formName) < 1 or len(formName) > 32):
                 return jsonify({"error": "userName needs to be 1-32 characters"}), 400
 
@@ -204,6 +204,31 @@ class User:
         # Update session var with name.
         session.modified = True
         session['user']['userName'] = formName
+
+        return jsonify({"success": 'Sucess'}), 200
+
+    # Edit Email of a CardsUser.
+    def EditEmail(self):
+        formEmail = request.form.get('email')
+
+        # No change to name check.
+        if(formEmail == session['user']['email']):
+            return jsonify({'error': 'No Change to Email'}), 400
+
+        # Unique email check.
+        emailExitsCheck = CardsUser.objects(email = formEmail)
+        if(emailExitsCheck):
+            return jsonify({'error': 'Email Already Exits'}), 400
+
+        # Check form email Length.
+        if(len(formEmail) < 1 or len(formEmail) > 32):
+                return jsonify({"error": "Email needs to be 1-32 characters"}), 400
+
+        CardsUser.objects(email = session['user']['email']).update_one(set__email = formEmail)
+
+        # Update session var with name.
+        session.modified = True
+        session['user']['email'] = formEmail
 
         return jsonify({"success": 'Sucess'}), 200
 
