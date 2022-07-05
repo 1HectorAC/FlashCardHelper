@@ -146,6 +146,26 @@ $("form[name=editName]").submit(function (e) {
     e.preventDefault();
 });
 
+// Handle form to edit users name.
+$("form[name=editEmail]").submit(function (e) {
+    var $form = $(this);
+    var $error = $form.find(".error");
+    var data = $form.serialize();
+    $.ajax({
+        url: "/user/editEmail",
+        type: "POST",
+        data: data,
+        dataType: "json",
+        success: function (resp) {
+            window.location.href = "/editUser/";
+        },
+        error: function (resp) {
+            $error.text(resp.responseJSON.error).removeClass("error--hidden");
+        }
+    });
+    e.preventDefault();
+});
+
 // Make text boxes for entering questions and answer cards.
 function GenerateBoxes() {
     num = $('#questionTotal').val()
