@@ -201,6 +201,9 @@ class User:
 
         CardsUser.objects(userName = session['user']['userName']).update_one(set__userName = formName)
 
+        # Update owner name of cards to new name.
+        CardsList.objects(owner_name = session['user']['userName']).update(set__owner_name = formName)
+
         # Update session var with name.
         session.modified = True
         session['user']['userName'] = formName
