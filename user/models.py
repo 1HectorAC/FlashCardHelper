@@ -233,8 +233,33 @@ class User:
         session.modified = True
         session['user']['email'] = formEmail
 
-        return jsonify({"success": 'Sucess'}), 200
+        return jsonify({'success': 'Sucess'}), 200
+    
+    # Edit password of cardUser.
+    def EditPassword(self):
+        oldPassword = request.form.get('password')
+        newPassword = request.form.get('newPassword')
+        newPasswordAgain = request.form.get('newPasswordAgain')
+        
+        user = CardsUser.objects.get(userName = session['user']['userName'])
 
+        # Check if password matches.
+        if not (pbkdf2_sha256.verify(oldPassword, user['password'])): 
+            return jsonify({'error': 'Wrong password entered'}), 400
+
+        # Check if new password is right length.
+        if(len(newPassword) <=0 or len(newPassword) > 32):
+            return jsonify({'error': 'New Password needs to be 0-32 characters.'}), 400
+
+        # Check if new password matches re-entered new password.
+        if(newPassword != newPasswordAgain):
+            return jsonify({'error': 'Re-entered Password does not match New password.'}), 400
+
+        # Edit password with new one.
+        encrypted_password = pbkdf2_sha256.encrypt(newPassword)
+        CardsUser.objects(userName = session['user']['userName']).update_one(set__password=encrypted_password)
+
+        return jsonify({'success': 'Success'}), 200
 
 # Get a users Cards. Sorted by timestamp.
 def GetUsersCardsLists(userName):

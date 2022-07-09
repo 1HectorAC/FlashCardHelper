@@ -46,3 +46,7 @@ def editName():
 @app.route("/user/editEmail", methods=["POST"])
 def editEmail():
     return User().EditEmail()
+
+@app.route("/user/editPassword", methods=["POST"])
+def editPassword():
+    return User().EditPassword()
