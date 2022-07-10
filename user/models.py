@@ -78,6 +78,11 @@ class User:
 
     # Add Cards list.
     def addCards(self):
+        cards = GetUsersCardsLists(session['user']['userName'])
+
+        # check if hit max number of flash card sets limit.
+        if len(cards) > 50:
+            return jsonify({'error':'Max Flash Cards limit is 50. Delete some to make more.'}),401
         
         # Get person to save owner reference into into cardsList created.
         person = CardsUser.objects.get(email = session['user']['email'])
