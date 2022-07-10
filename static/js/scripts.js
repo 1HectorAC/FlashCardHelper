@@ -217,6 +217,7 @@ function GenerateBoxes() {
         card.append(answerPart)
         $('#questionSection').append(card)
     }
+    $('#questionSection').append('<p class="error error--hidden" style="color:rgb(255, 177, 177)"></p>')
     $('#questionSection').append('<input type="submit" value="Enter" class="btn lPinkButton" style="margin-top:10px"></input>')
     $('#questionSection').show()
 }

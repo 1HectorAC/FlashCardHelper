@@ -110,12 +110,17 @@ class User:
 
         return redirect('/dashboard/')
 
-    # Add a card to cards list
+    # Add a card to cards list.
     def addCard(self):
         questionList = request.form.getlist('questionPart')
         answerList = request.form.getlist('answerPart')
         cardsTitle = request.form.get('cardsTitle')
         
+        # Check if max cards limit reached.
+        cards = GetSingleCardsList(session['user']['userName'], cardsTitle)
+        if len(cards) + len(questionList) > 150:
+            return jsonify({'error':'150 cards Limit reached. Delete some cards to make more.'}),401
+
         # Setup data to add.
         data = []
         if "" not in questionList and "" not in answerList and len(questionList) == len(answerList):
