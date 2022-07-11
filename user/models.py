@@ -32,6 +32,12 @@ class User:
         return jsonify(user), 200
 
     def signup(self):
+        # Password and re-entered password match check.
+        password = request.form.get('password')
+        passwordAgain = request.form.get('passwordAgain')
+        if password != passwordAgain:
+            return jsonify({'error':'Password and Re-Entered Password don\'t match.'}), 400
+
         #Create to user object
         user = CardsUser(
             _id = uuid.uuid4().hex,
@@ -48,7 +54,7 @@ class User:
         nameExitsCheck = CardsUser.objects(userName = user.userName)
         if(nameExitsCheck):
             return jsonify({'error': 'Signup failed. UserName Already Exits'}), 400
-        # Unique username check.
+        # Unique email check.
         emailExitsCheck = CardsUser.objects(email = user.email)
         if(emailExitsCheck):
             return jsonify({'error': 'Signup failed. Email Already Exits'}), 400
