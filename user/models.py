@@ -88,7 +88,7 @@ class User:
 
         # check if hit max number of flash card sets limit.
         if len(cards) > 50:
-            return jsonify({'error':'Max Flash Cards limit is 50. Delete some to make more.'}),401
+            return jsonify({'error':'Max Flash Cards limit is 50. Delete some to make more.'}),400
         
         # Get person to save owner reference into into cardsList created.
         person = CardsUser.objects.get(email = session['user']['email'])
@@ -125,7 +125,7 @@ class User:
         # Check if max cards limit reached.
         cards = GetSingleCardsList(session['user']['userName'], cardsTitle)
         if len(cards) + len(questionList) > 150:
-            return jsonify({'error':'150 cards Limit reached. Delete some cards to make more.'}),401
+            return jsonify({'error':'150 cards Limit reached. Delete some cards to make more.'}),400
 
         # Setup data to add.
         data = []
@@ -175,7 +175,7 @@ class User:
             if(titleCheck):
                 CardsList.objects(Q(title = oldTitle) & Q(owner_name = session['user']['userName'])).update_one(set__title = newTitle)
             else:
-                return jsonify({'error': 'Title already used.'}), 401
+                return jsonify({'error': 'Title already used.'}), 400
         
         return jsonify({'success': 'Sucess'}), 200
 
