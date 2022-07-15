@@ -54,17 +54,17 @@
                     <div class="card-body">
                         <form name="signup_form">
                             <label for="name">Name</label>
-                            <input type="text" name="name" class="field form-control centerShortField" maxlength="32"
-                                placeholder="Enter Name Here" required>
+                            <input type="text" name="name" class="field form-control centerShortField" 
+                                maxlength="16" minlength="1" placeholder="Enter Name Here" required>
                             <label for="email">Email</label>
-                            <input type="text" name="email" class="field form-control centerShortField" maxlength="32"
-                                placeholder="Enter Email Here" required>
+                            <input type="text" name="email" class="field form-control centerShortField"
+                                maxlength="32" placeholder="Enter Email Here" required>
                             <label for="password">Password</label>
                             <input type="password" name="password" class="field form-control centerShortField"
-                                maxlength="32" placeholder="Enter Password Here" required>
+                                maxlength="32" minlength="4" placeholder="Enter Password Here" required>
                             <label for="passwordAgain">Re-Enter Password</label>
-                            <input type="password" name="passwordAgain" class="field form-control centerShortField" maxlength="32"
-                                placeholder="Enter Again Password Here" required>
+                            <input type="password" name="passwordAgain" class="field form-control centerShortField"
+                                maxlength="32" minlength="4" placeholder="Enter Again Password Here" required>
                             <input type="submit" value="Sign Up" class="brownButton btn" style="margin-top:10px">
                             <p class="error error--hidden" style="color:red"></p>
                         </form>

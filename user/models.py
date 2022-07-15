@@ -6,6 +6,7 @@ from mongoengine.queryset.visitor import Q
 from datetime import datetime
 import json
 import os
+import re
 
 connect(db='test', host=os.getenv('DB_HOST'), port=27017)
 
@@ -32,32 +33,43 @@ class User:
         return jsonify(user), 200
 
     def signup(self):
-        # Password and re-entered password match check.
-        password = request.form.get('password')
-        passwordAgain = request.form.get('passwordAgain')
-        if password != passwordAgain:
-            return jsonify({'error':'Password and Re-Entered Password don\'t match.'}), 400
+        formUserName = request.form.get('name')
+        formEmail = request.form.get('email')
+        formPassword = request.form.get('password')
+        formPasswordAgain = request.form.get('passwordAgain')
 
-        #Create to user object
+        # INPUT VALIDATION
+        # Input length also checked in html so this is not likely used, but still important just in case.
+        if len(formUserName) <=0 or len(formPassword) < 4:
+            return jsonify({'error': 'Input(s) too short.'}), 400
+        if len(formUserName) >16 or len(formPassword) >= 32:
+            return jsonify({'error': 'Input(s) too long.'}), 400
+        # Email format check.
+        emailRegex = '^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$'
+        if(not re.search(emailRegex,formEmail)):   
+            return jsonify({"error": "Email is not properly formated."}), 400
+        # Password and re-entered password match check.
+        if formPassword != formPasswordAgain:
+            return jsonify({'error':'Password and Re-Entered Password don\'t match.'}), 400    
+        # Unique username check.
+        nameExitsCheck = CardsUser.objects(userName = formUserName)
+        if(nameExitsCheck):
+            return jsonify({'error': 'Signup failed. UserName Already Exits'}), 400
+        # Unique email check.
+        emailExitsCheck = CardsUser.objects(email = formEmail)
+        if(emailExitsCheck):
+            return jsonify({'error': 'Signup failed. Email Already Exits'}), 400
+
+        #Create user object.
         user = CardsUser(
             _id = uuid.uuid4().hex,
-            userName = request.form.get('name'),
-            email = request.form.get('email'),
-            password = request.form.get('password')
+            userName = formUserName,
+            email = formEmail,
+            password = formPassword
         )
 
         # Encrypt password
         user.password = pbkdf2_sha256.encrypt(user['password'])
-
-        # ADD MORE VALIDATION HERE LATER.
-        # Unique username check.
-        nameExitsCheck = CardsUser.objects(userName = user.userName)
-        if(nameExitsCheck):
-            return jsonify({'error': 'Signup failed. UserName Already Exits'}), 400
-        # Unique email check.
-        emailExitsCheck = CardsUser.objects(email = user.email)
-        if(emailExitsCheck):
-            return jsonify({'error': 'Signup failed. Email Already Exits'}), 400
 
         # Save user to db and start session. 
         # Note: passing python dict of user
