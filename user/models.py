@@ -96,26 +96,36 @@ class User:
 
     # Add Cards list.
     def addCards(self):
+        formTitle = request.form.get('title')
+        formDescription = request.form.get('description')
+        formPublic = request.form.get('public')
         cards = GetUsersCardsLists(session['user']['userName'])
 
+        # INPUT VALIDATION
+        # Input length also checked in html so this is not likely used, but still important just in case.
+        if len(formTitle) <= 0 or len(formDescription) <= 0:
+            return jsonify({'error':'Inputs can\'t be empty.'}), 400
+        if len(formTitle) > 16 or len(formDescription) > 100:
+            return jsonify({'error': 'Inputs are too long.'}),400
         # check if hit max number of flash card sets limit.
         if len(cards) > 50:
-            return jsonify({'error':'Max Flash Cards limit is 50. Delete some to make more.'}),400
+            return jsonify({'error':'Max Flash Cards limit is 50. Delete some to make more.'}), 400
         
         # Get person to save owner reference into into cardsList created.
         person = CardsUser.objects.get(email = session['user']['email'])
 
         cards = CardsList(
             _id = uuid.uuid4().hex,
-            title = request.form.get('title'),
-            description = request.form.get('description'),
-            public = True if request.form.get('public') == "true" else False,
+            title = formTitle,
+            description = formDescription,
+            public = True if formPublic == "true" else False,
             cards = [],
             owner_name = person.userName  
         )
-        cards.save()
+        if cards.save():
+            return jsonify({"success": "Sucess"}), 200
 
-        return jsonify({"success": "Sucess"}), 200
+        return jsonify({'error':'Invalid cards.'}), 400
 
     # Delete Cards list.
     def RemoveCardsList(self, cardTitle):
