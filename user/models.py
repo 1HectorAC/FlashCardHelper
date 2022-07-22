@@ -144,21 +144,31 @@ class User:
         answerList = request.form.getlist('answerPart')
         cardsTitle = request.form.get('cardsTitle')
         
+        # INPUT VALIDATION
+        # Input length also checked in html so this is not likely used, but still important just in case.
+        if len(questionList) <=0 or len(answerList) < 0:
+            return jsonify({'error': 'Empty Questions or Answers'}),400
+        if len(questionList) > 20 or len(answerList) > 20:
+            return jsonify({'error': 'To many Questions or Answers'}), 400
+
         # Check if max cards limit reached.
         cards = GetSingleCardsList(session['user']['userName'], cardsTitle)
         if len(cards) + len(questionList) > 150:
-            return jsonify({'error':'150 cards Limit reached. Delete some cards to make more.'}),400
+            return jsonify({'error':'150 cards Limit. Make less cards or delete some.'}), 400
 
         # Setup data to add.
         data = []
         if "" not in questionList and "" not in answerList and len(questionList) == len(answerList):
             for x in range(0, len(questionList)):
                 data.append({'question' : questionList[x], 'answer' : answerList[x]})
-
-        # Added cards to cardslist
-        CardsList.objects(Q(title = cardsTitle) & Q(owner_name = session['user']['userName'])).update_one(push_all__cards = data)
+        else:
+            return jsonify({'error':'There is an emply question or answer.'}), 400
         
-        return jsonify({"success": "Sucess"}), 200
+        # Added cards to cardslist
+        if CardsList.objects(Q(title = cardsTitle) & Q(owner_name = session['user']['userName'])).update_one(push_all__cards = data):
+            return jsonify({"success": "Sucess"}), 200
+            
+        return jsonify({'error':'Invalid cards.'})
 
     # Delete a card from the card list.
     def RemoveCard(self, cardTitle, cardNumber):

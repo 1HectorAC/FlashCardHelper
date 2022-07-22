@@ -190,10 +190,10 @@ $("form[name=editPassword]").submit(function (e) {
 function GenerateBoxes() {
     num = $('#questionTotal').val()
 
-    // Error check for input length.
-    if (num < 1 || num > 99) {
-        $('.error').text("Number must be between 1-99")
-        return;
+    // Length check
+    if(num <= 0 || num > 20){
+        $('.error2').text('Number must be between 1-20')
+        return
     }
 
     $('#numberSection').hide()

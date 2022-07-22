@@ -73,12 +73,13 @@
         <div id="AddCards" class="collapse">
             <hr style="background-color:rgba(139, 77, 70, 0.7)">
             <div id="numberSection">
-                <h5 style="margin:5px">Enter how many cards to add:</h5>
+                <h5 style="margin:2px">How many cards to add:</h5>
+                <p style="margin:2px">(20 max at a time, 150 total limit.)</p>
                 <input type="number" id="questionTotal" name="questionTotal" class="form form-control mx-auto"
-                    style="  width:65px; margin:5px" required>
+                    style="width:65px; margin:5px" required>
                 <input id="numberButton" class="btn lPinkButton" type="button" value="Enter"
                     onclick="GenerateBoxes();" />
-                <p class="error error--hidden" style="color:rgb(255, 177, 177)"></p>
+                <p class="error2" style="color:rgb(255, 177, 177)"></p>
             </div>
             <form name="addCard" id="questionSection" style="display:none">
                 <input type="hidden" id="cardsTitle" name="cardsTitle" value={{ cards.title }}>
