@@ -229,3 +229,12 @@ function toggleEditCard(num) {
     else
         $('#cardDropdown' + num + '').fadeOut('fast');
 }
+
+// Show confirmation window when deleting a cards List.
+function deleteCardsListConfirmation(cardsTitle) {
+    let text;
+    if (confirm("Delete flash cards set \""+cardsTitle+"\" Confirmation.") == true) {
+        window.location.href = "/user/deleteCards/"+ cardsTitle;
+    } 
+    
+  }
