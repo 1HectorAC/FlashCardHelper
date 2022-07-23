@@ -232,9 +232,12 @@ function toggleEditCard(num) {
 
 // Show confirmation window when deleting a cards List.
 function deleteCardsListConfirmation(cardsTitle) {
-    let text;
-    if (confirm("Delete flash cards set \""+cardsTitle+"\" Confirmation.") == true) {
-        window.location.href = "/user/deleteCards/"+ cardsTitle;
-    } 
-    
-  }
+    if (confirm("Delete flash cards set \""+cardsTitle+"\" Confirmation.") == true)
+        window.location.href = "/user/deleteCards/"+ cardsTitle; 
+}
+
+// Show confirmation window when deleting a card.
+function deleteCardConfirmation(cardsTitle, index, question, answer) {
+    if (confirm("Delete card Confirmation.\n Question: "+question+"\n Answer: "+answer) == true)
+        window.location.href = "/user/deleteCard/"+cardsTitle+"/"+ index; 
+}

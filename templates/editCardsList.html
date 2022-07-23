@@ -110,8 +110,9 @@
                     <td>{{ x.answer }}</td>
                     <td>
                         <input class="btn brownButton" type="button" value="Edit"
-                            onclick="toggleEditCard( {{ loop.index }} );" />
-                        <a class="btn brownButton" href="/user/deleteCard/{{cards.title}}/{{ loop.index-1 }}">-</a>
+                            onclick="toggleEditCard('{{ loop.index }}');" />
+                        <input class="btn brownButton" type="button" value="-" onclick="deleteCardConfirmation('{{cards.title}}','{{loop.index-1}}','{{x.question}}','{{x.answer}}');" />
+
                     </td>
                 </tr>
                 <tr id="cardDropdown{{loop.index}}" style="display:none">
