@@ -198,6 +198,7 @@ function GenerateBoxes() {
 
     $('#numberSection').hide()
 
+    $('#questionSection').append('<p >Note: Questions or Answers must be 100 characters or less.</p>')
     $('#questionSection').append('<p style="display:inline-block; width:50%">Questions</p>')
     $('#questionSection').append('<p style="display:inline-block; width:50%">Answers</p>')
 
