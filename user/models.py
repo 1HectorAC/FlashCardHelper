@@ -193,15 +193,23 @@ class User:
         newPublic = True if request.form.get('public') == "true" else False
         
         cardsData = GetSingleCardsList(session['user']['userName'], oldTitle)
-
+        
         # Edit description if changed.
         if(newDescription != cardsData['description']):
+            # Description length validcation.
+            if len(newDescription) <=0 or len(newDescription) > 100:
+                return jsonify({'error': 'Description must be between 1-100 characters.'}),400
             CardsList.objects(Q(title = oldTitle) & Q(owner_name = session['user']['userName'])).update_one(set__description = newDescription)
+        
         # Edit public if changed.
         if(newPublic != cardsData['public']):
             CardsList.objects(Q(title = oldTitle) & Q(owner_name = session['user']['userName'])).update_one(set__public = newPublic)
+        
         # Edit title if changed.
         if(newTitle != oldTitle):
+            # Title length validation.
+            if len(newTitle) <=0 or len(newTitle) > 16:
+                return jsonify({'error':'Title must be between 1-16 characters.'}),400
             # Check if title of cards already exits by owner.
             titleCheck = True if len(json.loads(CardsList.objects(Q(title = newTitle) & Q(owner_name = session['user']['userName'])).to_json())) == 0 else False
             if(titleCheck):
