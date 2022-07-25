@@ -160,6 +160,8 @@ class User:
         data = []
         if "" not in questionList and "" not in answerList and len(questionList) == len(answerList):
             for x in range(0, len(questionList)):
+                if len(answerList[x]) > 100 or len(questionList[x]) > 100:
+                    return jsonify({'error':'A Question/Answer is longer than 100 characters.'}),400
                 data.append({'question' : questionList[x], 'answer' : answerList[x]})
         else:
             return jsonify({'error':'There is an emply question or answer.'}), 400
