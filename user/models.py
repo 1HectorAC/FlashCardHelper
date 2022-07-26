@@ -297,7 +297,7 @@ class User:
             session['user']['email'] = formEmail
 
             return jsonify({'success': 'Sucess'}), 200
-            
+
         return jsonify({'error':'Error changing email.'}), 400
     
     # Edit password of cardUser.
@@ -322,9 +322,10 @@ class User:
 
         # Edit password with new one.
         encrypted_password = pbkdf2_sha256.encrypt(newPassword)
-        CardsUser.objects(userName = session['user']['userName']).update_one(set__password=encrypted_password)
-
-        return jsonify({'success': 'Success'}), 200
+        if CardsUser.objects(userName = session['user']['userName']).update_one(set__password=encrypted_password):
+            return jsonify({'success': 'Success'}), 200
+            
+        return jsonify({'error':'Error changing password.'}), 400
 
 # Get a users Cards. Sorted by timestamp.
 def GetUsersCardsLists(userName):
