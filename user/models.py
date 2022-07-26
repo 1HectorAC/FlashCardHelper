@@ -272,7 +272,7 @@ class User:
 
             return jsonify({"success": 'Sucess'}), 200
 
-        return jsonify({'error':'Error Changing Name'})
+        return jsonify({'error':'Error Changing Name'}), 400
 
     # Edit Email of a CardsUser.
     def EditEmail(self):
@@ -291,13 +291,14 @@ class User:
         if(len(formEmail) < 1 or len(formEmail) > 32):
                 return jsonify({"error": "Email needs to be 1-32 characters"}), 400
 
-        CardsUser.objects(email = session['user']['email']).update_one(set__email = formEmail)
+        if CardsUser.objects(email = session['user']['email']).update_one(set__email = formEmail):
+            # Update session var with name.
+            session.modified = True
+            session['user']['email'] = formEmail
 
-        # Update session var with name.
-        session.modified = True
-        session['user']['email'] = formEmail
-
-        return jsonify({'success': 'Sucess'}), 200
+            return jsonify({'success': 'Sucess'}), 200
+            
+        return jsonify({'error':'Error changing email.'}), 400
     
     # Edit password of cardUser.
     def EditPassword(self):
