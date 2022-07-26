@@ -229,16 +229,22 @@ class User:
         cardsTitle = request.form.get('cardsTitle')
         cardIndex = int(request.form.get('cardIndex')) - 1
 
-        if(questionEdit == '' or answerEdit == '' or cardsTitle == '' or cardIndex == ''):
-            return jsonify({'success': 'Sucess'}), 200
+        #VALICATION
+        # Length and empty data already checked in html. This is just for extra security.
+        if questionEdit == '' or answerEdit == '' or cardsTitle == '' or cardIndex == '':
+            return jsonify({'error': 'Empty data submited'}), 400
+        if len(questionEdit) > 100 or len(answerEdit) > 100:
+            return jsonify({'error': '100 Char limit.'}), 400
         
         # Get cards, edit and save.
         cardsData = json.loads(CardsList.objects.get(title = cardsTitle).to_json())
         cards = cardsData['cards']
         cards[cardIndex] = {'question':questionEdit, 'answer': answerEdit}
-        CardsList.objects(title = cardsTitle).update_one(set__cards = cards)
 
-        return jsonify({'success': 'Sucess'}), 200
+        if CardsList.objects(title = cardsTitle).update_one(set__cards = cards):
+            return jsonify({'success':'Sucess'}),200
+
+        return jsonify({'error': 'Invalid edit card data'}), 400
 
     # Edit UserName of a CardsUser.
     def EditName(self):

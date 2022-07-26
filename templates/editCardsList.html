@@ -61,7 +61,6 @@
             <p class="error error--hidden" style="color:red"></p>
         </div>
     </form>
-
 </div>
 
 <!-- Section to add cards. -->
@@ -112,7 +111,6 @@
                         <input class="btn brownButton" type="button" value="Edit"
                             onclick="toggleEditCard('{{ loop.index }}');" />
                         <input class="btn brownButton" type="button" value="-" onclick="deleteCardConfirmation('{{cards.title}}','{{loop.index-1}}','{{x.question}}','{{x.answer}}');" />
-
                     </td>
                 </tr>
                 <tr id="cardDropdown{{loop.index}}" style="display:none">
@@ -130,9 +128,8 @@
                         </td>
                         <td>
                             <input class="btn brownButton" type="submit" value="Save" />
-                        </td>
+                        </td>   
                     </form>
-
                 </tr>
                 {% endfor %}
             </tbody>
