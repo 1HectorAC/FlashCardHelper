@@ -92,8 +92,8 @@
                     {% for card in cards %}
                     <div class="col-md-4">
                         <a href="/viewCards/{{ card.owner_name }}/{{card.title}}" style="text-decoration: none;">
-                            <div class="pinkPanel">
-                                <h4 style="margin:2px"><b>{{ card.title }}</b></h4>
+                            <div class="pinkPanel" style="word-wrap:break-word">
+                                <h5 style="margin:2px"><b>{{ card.title }}</b></h5>
                                 <p style="margin:2px"> By {{card.owner_name}}</p>
                                 <hr style="margin:5px">
                                 <p style="margin:2px">-Description-</p>
