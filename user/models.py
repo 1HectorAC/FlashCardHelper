@@ -260,19 +260,19 @@ class User:
             return jsonify({'error': 'UserName Already Exits'}), 400
 
         # Check form name Length.
-        if(len(formName) < 1 or len(formName) > 32):
-                return jsonify({"error": "userName needs to be 1-32 characters"}), 400
+        if(len(formName) < 1 or len(formName) > 16):
+                return jsonify({"error": "userName needs to be 1-16 characters"}), 400
 
-        CardsUser.objects(userName = session['user']['userName']).update_one(set__userName = formName)
+        if CardsUser.objects(userName = session['user']['userName']).update_one(set__userName = formName):
+            CardsList.objects(owner_name = session['user']['userName']).update(set__owner_name = formName)
+            
+            # Update session var with name.
+            session.modified = True
+            session['user']['userName'] = formName
 
-        # Update owner name of cards to new name.
-        CardsList.objects(owner_name = session['user']['userName']).update(set__owner_name = formName)
+            return jsonify({"success": 'Sucess'}), 200
 
-        # Update session var with name.
-        session.modified = True
-        session['user']['userName'] = formName
-
-        return jsonify({"success": 'Sucess'}), 200
+        return jsonify({'error':'Error Changing Name'})
 
     # Edit Email of a CardsUser.
     def EditEmail(self):
