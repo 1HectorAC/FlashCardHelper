@@ -75,3 +75,7 @@ def postSearchCards():
 @login_required
 def editUser():
     return render_template('editUser.html')
+
+@app.route('/about/', methods=['GET'])
+def about():
+    return render_template('about.html')
