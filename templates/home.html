@@ -36,7 +36,7 @@
                             <input type="password" name="password" class="field form-control centerShortField"
                                 maxlength="32" placeholder="Enter Password" required>
                             <input type="submit" value="Log In" class="brownButton btn" style="margin-top: 10px;">
-                            <p class="error error--hidden"></p>
+                            <p class="error error--hidden" style="color:red"></p>
                         </form>
                     </div>
                 </div>
@@ -54,20 +54,19 @@
                     <div class="card-body">
                         <form name="signup_form">
                             <label for="name">Name</label>
-                            <input type="text" name="name" class="field form-control centerShortField" maxlength="32"
-                                placeholder="Enter Name Here" required>
+                            <input type="text" name="name" class="field form-control centerShortField" 
+                                maxlength="16" minlength="1" placeholder="Enter Name Here" required>
                             <label for="email">Email</label>
-                            <input type="text" name="email" class="field form-control centerShortField" maxlength="32"
-                                placeholder="Enter Email Here" required>
+                            <input type="text" name="email" class="field form-control centerShortField"
+                                maxlength="32" placeholder="Enter Email Here" required>
                             <label for="password">Password</label>
                             <input type="password" name="password" class="field form-control centerShortField"
-                                maxlength="32" placeholder="Enter Password Here" required>
-                            <!--
-                                <label for="password2">Re-Enter Password</label>
-                                <input type="password" name="password2" class="field form-control centerShortField" maxlength="32" placeholder="Enter Password Here" required>
-                                <div style="padding-top: 10px;">-->
+                                maxlength="32" minlength="4" placeholder="Enter Password Here" required>
+                            <label for="passwordAgain">Re-Enter Password</label>
+                            <input type="password" name="passwordAgain" class="field form-control centerShortField"
+                                maxlength="32" minlength="4" placeholder="Enter Again Password Here" required>
                             <input type="submit" value="Sign Up" class="brownButton btn" style="margin-top:10px">
-                            <p class="error error--hidden"></p>
+                            <p class="error error--hidden" style="color:red"></p>
                         </form>
                     </div>
                 </div>
@@ -93,8 +92,8 @@
                     {% for card in cards %}
                     <div class="col-md-4">
                         <a href="/viewCards/{{ card.owner_name }}/{{card.title}}" style="text-decoration: none;">
-                            <div class="pinkPanel">
-                                <h4 style="margin:2px"><b>{{ card.title }}</b></h4>
+                            <div class="pinkPanel" style="word-wrap:break-word">
+                                <h5 style="margin:2px"><b>{{ card.title }}</b></h5>
                                 <p style="margin:2px"> By {{card.owner_name}}</p>
                                 <hr style="margin:5px">
                                 <p style="margin:2px">-Description-</p>

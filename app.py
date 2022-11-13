@@ -70,3 +70,16 @@ def postSearchCards():
     cardsLists = GetCardsByTitleSearch()
     titleSearch = request.form.get('title')
     return render_template('searchCards.html', cards = cardsLists, titleSearch = titleSearch)
+
+@app.route('/editUser/', methods=['GET'])
+@login_required
+def editUser():
+    return render_template('editUser.html')
+
+@app.route('/about/', methods=['GET'])
+def about():
+    return render_template('about.html')
+
+@app.route('/contact/', methods=['GET'])
+def contact():
+    return render_template('contact.html')

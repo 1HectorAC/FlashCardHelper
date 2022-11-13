@@ -38,3 +38,15 @@ def editCards():
 @app.route("/user/editCard", methods=["POST"])
 def editCard():
     return User().EditCard()
+
+@app.route("/user/editName", methods=["POST"])
+def editName():
+    return User().EditName()
+
+@app.route("/user/editEmail", methods=["POST"])
+def editEmail():
+    return User().EditEmail()
+
+@app.route("/user/editPassword", methods=["POST"])
+def editPassword():
+    return User().EditPassword()
