@@ -29,7 +29,8 @@
     </div>
     
     <form name="editCards">
-        <input type="hidden" id="oldTitle" name="oldTitle" value={{ cards.title }}>
+        <!-- Need single quotes in value. Error reading values with a space in it-->
+        <input type="hidden" id="oldTitle" name="oldTitle" value='{{ cards.title }}'>
         <div class="form-row">
             <div class="form-group col-md-3">
                 <label for="title" hidden>Title</label>
@@ -81,7 +82,8 @@
                 <p class="error2" style="color:rgb(255, 177, 177)"></p>
             </div>
             <form name="addCard" id="questionSection" style="display:none">
-                <input type="hidden" id="cardsTitle" name="cardsTitle" value={{ cards.title }}>
+                <!-- Need single quotes in value. Error reading values with a space in it-->
+                <input type="hidden" id="cardsTitle" name="cardsTitle" value='{{ cards.title }}'>
             </form>
         </div>
     </div>
@@ -115,7 +117,7 @@
                 </tr>
                 <tr id="cardDropdown{{loop.index}}" style="display:none">
                     <form name="editCard">
-                        <input type="hidden" id="cardsTitle" name="cardsTitle" value={{ cards.title }}>
+                        <input type="hidden" id="cardsTitle" name="cardsTitle" value='{{ cards.title }}'>
                         <input type="hidden" id="cardIndex" name="cardIndex" value={{ loop.index }}>
                         <th></th>
                         <td>

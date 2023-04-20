@@ -150,9 +150,10 @@ class User:
             return jsonify({'error': 'Empty Questions or Answers'}),400
         if len(questionList) > 20 or len(answerList) > 20:
             return jsonify({'error': 'To many Questions or Answers'}), 400
-
-        # Check if max cards limit reached.
-        cards = GetSingleCardsList(session['user']['userName'], cardsTitle)
+        cardsList = GetSingleCardsList(session['user']['userName'], cardsTitle)
+        if(cardsList is None):
+            return jsonify({'error':'Sorry, there was an error. Please contact us for help.'}), 400
+        cards = cardsList['cards']
         if len(cards) + len(questionList) > 150:
             return jsonify({'error':'150 cards Limit. Make less cards or delete some.'}), 400
 
@@ -195,6 +196,8 @@ class User:
         newPublic = True if request.form.get('public') == "true" else False
         
         cardsData = GetSingleCardsList(session['user']['userName'], oldTitle)
+        if(cardsData is None):
+            return jsonify({'error': 'Sorry, there was an error. Contact us for help.'}),400
         
         # Edit description if changed.
         if(newDescription != cardsData['description']):
@@ -335,7 +338,10 @@ def GetUsersCardsLists(userName):
 # Get a single cards list.
 def GetSingleCardsList(userName, cardsTitle):
     cardsList = json.loads(CardsList.objects(Q(title = cardsTitle) & Q(owner_name = userName)).to_json())
-    return cardsList[0]
+    if(cardsList):
+        return cardsList[0]
+    else:
+        return None
         
 # Get all public flash card sets sorted by timestamp.
 def GetPublicCards():
